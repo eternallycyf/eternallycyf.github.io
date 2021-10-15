@@ -4510,6 +4510,51 @@ img {
     display: block !important;
   }
 }
+#vcomment button {
+  padding: 0.3rem 0.8rem;
+  border-color: #fff;
+  background-color: #49b1f5;
+  color: #fff;
+  font-size: 0.7rem;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#vcomment button:hover {
+  background-color: #ff7242;
+}
+#vcomment .vimg {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#vcomment .vimg:hover {
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+#vcomment .vat {
+  padding: 0 0.8rem;
+  border: 1px solid #49b1f5;
+  border-radius: 5px;
+  color: #49b1f5;
+  font-size: 0.7125rem;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#vcomment .vat:hover {
+  background-color: #49b1f5;
+  color: #fff;
+}
 #article-container .aplayer ol,
 #article-container .aplayer ul {
   margin: 0;
@@ -5506,6 +5551,16 @@ blockquote.pullquote.right {
 [data-theme='dark'] .mermaid {
   filter: brightness(0.7);
 }
+[data-theme='dark'] #vcomment .vbtn,
+[data-theme='dark'] #vcomment .vat {
+  border: 1px solid rgba(255,255,255,0.6);
+  background: #121212 !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+[data-theme='dark'] #vcomment .vbtn:hover,
+[data-theme='dark'] #vcomment .vat:hover {
+  background: #454545 !important;
+}
 [data-theme='light'] .read-mode {
   background: #fff;
 }
@@ -5745,5 +5800,59 @@ blockquote.pullquote.right {
   animation: none;
 }
 #web_bg {
-  background-image: url("https://img-blog.csdnimg.cn/853387f130bc4d579db0cd2ee231a5da.png");
+  background-image: url("https://img-blog.csdnimg.cn/422c302c033a415386e0dee5ec477ba7.png");
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(73,177,245,0.2);
+  border-radius: 2em;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #49b1f5;
+  background-image: -webkit--webkit-linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  background-image: -webkit--moz-linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  background-image: -webkit--o-linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  background-image: -webkit--ms-linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(45deg, rgba(255,255,255,0.4) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.4) 75%, transparent 75%, transparent);
+  border-radius: 2em;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+::-moz-selection {
+  color: #fff;
+  background-color: #49b1f5;
+}
+body {
+  cursor: url("https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur"),;
+default
+}
+a,
+img {
+  cursor: url("https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur"),;
+default
+}
+#aside_content,
+.card-archives,
+ul.card-archive-list,
+> .card-archive-list-item,
+a,
+span:first-child,
+.card-categories,
+ul.card-category-list,
+> .card-category-list-item {
+  width: auto;
+  min-width: 50%;
+}
+.read-mode {
+/* 字体大小 */
+  font-size: 17px;
+/* 可以在这里引入自定义字体，具体方法请自行百度css引入字体 */
+}
+.read-mode #web_bg {
+/* 背景颜色 */
+  background: #e6e6fa;
 }
