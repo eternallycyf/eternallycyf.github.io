@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>JavaScirpt ES6 &amp;&amp; ES7 wonderful APi</title>
+    <url>/eternallycyf/JavaScirpt%20ES6%20&amp;&amp;%20ES7%20wonderful%20APi/</url>
+    <content><![CDATA[<h2 id="Optional-chaining"><a href="#Optional-chaining" class="headerlink" title="Optional chaining (?.)"></a>Optional chaining (?.)</h2><ul>
+<li>我们常常有这样的场景 前端渲染数据时 需要 对嵌套的对象 查找属性</li>
+<li>在没有 es7 的 ?. 可选链操作符的时候 我们常常使用 &amp;&amp; || 三元表达式 等进行判断<ul>
+<li>需要访问 一个对象的 子属性, 为了避免报错 需要先判断 obj 不是 null 和 undefined 才进行下一步</li>
+<li><code>let id = obj.first &amp;&amp; obj.first.id</code></li>
+</ul>
+</li>
+<li>在有 ?. 之后 就很简单了<ul>
+<li><code>let id = obj.first?.second</code></li>
+</ul>
+</li>
+<li>是不是很直观呢 ~</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Optional_chaining">mdn-Link</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># ?. 可选链操作符</span><br><span class="line">a ?. b</span><br><span class="line"><span class="comment">// 如果左侧对象为 null 或 undefined 就不再往下进行直接返回 undefined</span></span><br><span class="line"># 使用方式</span><br><span class="line">obj?.prop</span><br><span class="line">obj?.[expr]</span><br><span class="line">arr?.[index]</span><br><span class="line">func?.(args)</span><br><span class="line"><span class="comment">// 和正常一样 就是加了个 符号  如果不存在就返回undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最后 需要注意的是 ?. 不能用于赋值 </span></span><br><span class="line">object?.property = <span class="number">1</span>; </span><br><span class="line"><span class="comment">// Uncaught SyntaxError: Invalid left-hand side in assignment</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Nullish-coalescing-operator"><a href="#Nullish-coalescing-operator" class="headerlink" title="Nullish coalescing operator (??)"></a>Nullish coalescing operator (??)</h2><ul>
+<li>我们常常有这样的场景 前端渲染数据时 数据由于是异步的 </li>
+<li>所以需要在动态渲染之前 进行判断 如果数据还没有 就为 ‘–’ 等形式显示数据</li>
+<li>来达到 及时刷新 ,页面结构也能正常显示的目的</li>
+<li>不使用它之前 我们常常这样</li>
+<li><code>typeof obj.id == &#39;number&#39; ? &#39;number&#39; : &#39;--&#39;</code></li>
+<li>在拥有了 ?? 之后 可以这样啦</li>
+<li><code>obj.id ?? &#39;--&#39;</code> </li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator">mdn-Link</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ??</span></span><br><span class="line">a ?? b</span><br><span class="line"><span class="comment">//当左侧的操作数为 null 或者 undefined 时，返回其右侧操作数，否则返回左侧操作数。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Truncate-the-string-backwards"><a href="#Truncate-the-string-backwards" class="headerlink" title="Truncate the string backwards"></a>Truncate the string backwards</h2><ul>
+<li>如何倒着截取字符串</li>
+<li>后端给的数据是这样的 <code>let data[0] = 111(&#39;标题&#39;)</code></li>
+<li>怎么快速得到 111 呢</li>
+<li>当然也可以通过 正则 等形式得到</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">data[<span class="number">0</span>].substr(<span class="number">0</span>, data[<span class="number">0</span>].lastIndexOf(<span class="string">&quot;(&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="Bitwise-NOT"><a href="#Bitwise-NOT" class="headerlink" title="Bitwise NOT (~)"></a>Bitwise NOT (~)</h2><ul>
+<li>碰到了一个奇葩代码。。。 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;abcdefg&#x27;</span></span><br><span class="line"><span class="keyword">let</span> classes = ~str.indexOf(<span class="string">&#x27;a&#x27;</span>) ? <span class="string">&#x27;active&#x27;</span> : <span class="string">&#x27;not-active&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(classes)</span><br><span class="line"><span class="comment">// ~ 按位非 </span></span><br><span class="line">~-<span class="number">1</span> = <span class="number">0</span>            <span class="comment">// 按位非 -1 刚刚好等于0</span></span><br><span class="line">~str.indexof(<span class="string">&#x27;a&#x27;</span>)  <span class="comment">// 而与 indexof 未查找到就返回 -1 相结合 </span></span><br><span class="line"><span class="comment">// 如果没有 找到 就会等于 0 , 而 0 与 三元表达式结合 会转换成 false</span></span><br><span class="line"><span class="comment">// 这样就达到了判断类名的功能</span></span><br></pre></td></tr></table></figure></li>
+<li>。。。 所以为什么不用 includes<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;abcdefg&#x27;</span></span><br><span class="line"><span class="keyword">let</span> classes = str.includes(<span class="string">&#x27;a&#x27;</span>) ? <span class="string">&#x27;active&#x27;</span> : <span class="string">&#x27;not-active&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(classes)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Bitwise-NOT-for-double"><a href="#Bitwise-NOT-for-double" class="headerlink" title="Bitwise NOT (~) for double"></a>Bitwise NOT (~) for double</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">~~number</span><br><span class="line"><span class="comment">// 可以以给任意 正负小数 取整</span></span><br><span class="line"><span class="built_in">Number</span>((-<span class="number">12.111</span>).toFixed(<span class="number">0</span>))</span><br><span class="line"><span class="comment">// 由于会变成字符串 所以需要变成数字</span></span><br><span class="line"><span class="built_in">Math</span>.floor(xxx)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScirpt Dynamic Import</title>
+    <url>/eternallycyf/JavaScirpt-Dynamic-Import/</url>
+    <content><![CDATA[<h2 id="1-Resolve-method"><a href="#1-Resolve-method" class="headerlink" title="1. Resolve method"></a>1. Resolve method</h2><ul>
+<li>相信你已经了解了 import 的常规使用方法</li>
+<li>但是在面对定制主题 (通过条件判断 动态导入不同的css) 等问题时 遇到了问题</li>
+<li>因为 import 只能出现在顶层结构, 即无法对其条件判断 等操作</li>
+<li>这时候就需要 dynamic import 来解决问题</li>
+</ul>
+<h2 id="1-1-in-JavaScript-or-React"><a href="#1-1-in-JavaScript-or-React" class="headerlink" title="1.1 in JavaScript or React"></a>1.1 in JavaScript or React</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// import</span></span><br><span class="line"><span class="keyword">let</span> flag = <span class="literal">false</span> <span class="comment">// 条件变量</span></span><br><span class="line"><span class="keyword">if</span> (flag) &#123;</span><br><span class="line">	<span class="keyword">import</span>(<span class="string">&#x27;./1.css&#x27;</span>)</span><br><span class="line">		.then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">		&#125;)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">import</span>(<span class="string">&#x27;./2.css&#x27;</span>)</span><br><span class="line">		.then(<span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">		&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// require.ensure 是 webpack 提供的语法</span></span><br><span class="line"><span class="comment">// 第一个参数是数组 第二个参数是函数 第三个参数是打包后的名字</span></span><br><span class="line"><span class="keyword">let</span> flag = <span class="literal">false</span> <span class="comment">// 条件变量</span></span><br><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">  <span class="built_in">require</span>.ensure([],<span class="function"><span class="keyword">function</span>(<span class="params">_require</span>)</span>&#123;</span><br><span class="line">  _require(<span class="string">&#x27;./1.css&#x27;</span>)</span><br><span class="line">  &#125;,<span class="string">&#x27;chunkName1&#x27;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">require</span>.ensure([],<span class="function"><span class="keyword">function</span>(<span class="params">_require</span>)</span>&#123;</span><br><span class="line">  _require(<span class="string">&#x27;./2.css&#x27;</span>)</span><br><span class="line">  &#125;,<span class="string">&#x27;chunkName2&#x27;</span>) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-in-Vue"><a href="#1-2-in-Vue" class="headerlink" title="1.2 in Vue"></a>1.2 in Vue</h2><ul>
+<li>Vue中 内置了 system.js</li>
+<li>使用时需要加入前缀system 即 system.import(‘./‘).then……</li>
+<li>其他内容不变</li>
+</ul>
+<h2 id="2-Resolve-Problem-Process"><a href="#2-Resolve-Problem-Process" class="headerlink" title="2. Resolve Problem Process"></a>2. Resolve Problem Process</h2><ul>
+<li>之前并不清楚 import 有提供动态导入的语法 </li>
+<li>因此尝试了三种方式 最后才发现 dynamic import 语法<ul>
+<li>a. 复制相同的 js 内容 弄成两个文件 每个文件使用不同的 css</li>
+<li>b. 将css挂载在public目录下</li>
+<li>c. webpack 配置</li>
+</ul>
+</li>
+<li>但最终还是推荐使用 import().then(()=&gt;{}) 的方式</li>
+</ul>
+<h2 id="2-1-Replication-Method"><a href="#2-1-Replication-Method" class="headerlink" title="2.1 Replication Method"></a>2.1 Replication Method</h2><ul>
+<li>需求是 Vue条件判断导入不同的 css </li>
+<li>所以直接 复制了一份原文件  新的Vue文件中写新的css </li>
+<li>Template 和 Script 部分保持一致</li>
+<li>这样的话 就很简单啦 只需要在引入的地方判断就行</li>
+<li>但是很 不优雅 </li>
+</ul>
+<h2 id="2-2-CSS-is-placed-in-the-public-directory"><a href="#2-2-CSS-is-placed-in-the-public-directory" class="headerlink" title="2.2 CSS is placed in the public directory"></a>2.2 CSS is placed in the public directory</h2><ul>
+<li>众所周知 weback 打包过后的 路径会发生变化 </li>
+<li>所以直接将 需要动态条件导入的 css文件 放在 public 目录下</li>
+<li>这时 确保导入了 但是怎么条件判断呢</li>
+<li>需要在 Temlate 中 借助 link 元素 导入 css</li>
+<li><code>&lt;link v-if=&quot;是否满足导入的条件&quot; rel=&quot;stylesheet&quot; href=&quot;./1.css&quot;/&gt;</code></li>
+<li>这样就大功告成了</li>
+<li>但是。。。同时极其不优雅</li>
+<li>打包后的目录会变成这样</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">- disk</span><br><span class="line">  - css</span><br><span class="line">  - js</span><br><span class="line">  - assets</span><br><span class="line">  - ...</span><br><span class="line">  - <span class="number">1.</span>css</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因此直接在 public 中新建了一个 css 文件夹, 将css文件放进去</li>
+<li>所以此时的 link 元素 href 变成了 <code>./css/1.css</code></li>
+<li>同时打包后的 动态css 与 其他css 文件也自动进行了合并 即都同处与 css 目录下</li>
+<li>额。。。这种也十分不优雅</li>
+</ul>
+<h2 id="2-3-webpack-Alias-configuration-path"><a href="#2-3-webpack-Alias-configuration-path" class="headerlink" title="2.3 webpack Alias configuration path"></a>2.3 webpack Alias configuration path</h2><ul>
+<li>当时本地环境 没有问题 </li>
+<li>开发环境却并没有动态导入 !!! </li>
+<li>所以这条 就不细说了</li>
+</ul>
+<h2 id="3-mdn-import-link"><a href="#3-mdn-import-link" class="headerlink" title="3 mdn-import link"></a>3 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/import">mdn-import link</a></h2>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Quick to create Electron Project</title>
+    <url>/eternallycyf/create-Electron-template-app/</url>
+    <content><![CDATA[<h2 id="quick-to-create-Electron-project-template"><a href="#quick-to-create-Electron-project-template" class="headerlink" title="quick to create Electron project template"></a>quick to create Electron project template</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/eternallycyf/create-Electron-template-app.git</span><br></pre></td></tr></table></figure>
+
+<h2 id="cd-create-Electron-template-app"><a href="#cd-create-Electron-template-app" class="headerlink" title="cd create-Electron-template-app"></a>cd create-Electron-template-app</h2><h2 id="yarn-amp-amp-npm-install"><a href="#yarn-amp-amp-npm-install" class="headerlink" title="yarn &amp;&amp; npm install"></a>yarn &amp;&amp; npm install</h2><h2 id="yarn-electron"><a href="#yarn-electron" class="headerlink" title="yarn electron"></a>yarn electron</h2><ul>
+<li>open the electron project for the electron</li>
+</ul>
+<h2 id="yarn-start"><a href="#yarn-start" class="headerlink" title="yarn start"></a>yarn start</h2><ul>
+<li>open the electron project for the browser</li>
+</ul>
+]]></content>
+      <categories>
+        <category>javaScript</category>
+      </categories>
+      <tags>
+        <tag>electron</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TypeScript 怎样覆盖接口的属性(覆盖 覆盖 不是添加)</title>
+    <url>/eternallycyf/TypeScript-overlay-properties/</url>
+    <content><![CDATA[<h1 id="1-Resolvent"><a href="#1-Resolvent" class="headerlink" title="1. Resolvent"></a>1. Resolvent</h1><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"># 覆盖接口属性</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns object T, but with T[K] overridden to type U.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@example</span></span></span><br><span class="line"><span class="comment"> * type MyObject = &#123; a: number, b: string &#125;</span></span><br><span class="line"><span class="comment"> * OverrideProperty&lt;MyObject, &quot;a&quot;, string&gt; // returns &#123; a: string, b: string &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> OverrideProperty&lt;T, K <span class="keyword">extends</span> keyof T, U&gt; = Omit&lt;T, K&gt; &amp; &#123; [P <span class="keyword">in</span> keyof Pick&lt;T, K&gt;]: U &#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-问题"><a href="#2-问题" class="headerlink" title="2. 问题"></a>2. 问题</h1><ul>
+<li>自己写 Button 组件的时候 需要外界传入 type 进行外观的设置</li>
+<li>但是由于 内部实现 使用了 原生的 button  此时 type 属性出现了冲突</li>
+<li>此时外界的 type 类型校验 提示的是原生的 submit button reset 所以接口报错了<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> BaseButtonProps &#123;</span><br><span class="line">   <span class="keyword">type</span>?: <span class="string">&#x27;primary&#x27;</span> | <span class="string">&#x27;default&#x27;</span> | <span class="string">&#x27;danger&#x27;</span> | <span class="string">&#x27;link&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> NativeButtonProps = BaseButtonProps &amp; ButtonHTMLAttributes&lt;HTMLElement&gt;</span><br><span class="line"><span class="keyword">type</span> AnchorButtonProps = BaseButtonProps &amp; AnchorHTMLAttributes&lt;HTMLElement&gt;</span><br><span class="line"><span class="keyword">type</span> ButtonProps = Partial&lt;NativeButtonProps &amp; AnchorButtonProps&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Button</span> <span class="attr">type</span>=<span class="string">&#123;</span> <span class="attr">submit</span> | <span class="attr">button</span> | <span class="attr">reset</span>&#125;&gt;</span>按钮<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="3-Check-the-ant-design-source-code"><a href="#3-Check-the-ant-design-source-code" class="headerlink" title="3. Check the ant design source code"></a>3. Check the ant design source code</h1><ul>
+<li>在源码可以发现(第四行) Omit 将 button 元素的原生属性 中的 type 和 onClick 省略了</li>
+<li>也就是说 获得了 除了 type 和 onClick 以外的所有 原生属性 </li>
+<li>此时使用交叉类型 &amp; , 再次给其添加 type 属性 就可以不报错了<br><img src="https://img-blog.csdnimg.cn/000e5b5f46fd48f9bce67c9a310abd51.png?x-oss-process=image"></li>
+</ul>
+<h1 id="4-Resolve-Problem"><a href="#4-Resolve-Problem" class="headerlink" title="4. Resolve Problem"></a>4. Resolve Problem</h1><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> BaseButtonProps &#123;</span><br><span class="line">  <span class="keyword">type</span>?: <span class="string">&#x27;primary&#x27;</span> | <span class="string">&#x27;default&#x27;</span> | <span class="string">&#x27;danger&#x27;</span> | <span class="string">&#x27;link&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> OverrideProperty&lt;T, K <span class="keyword">extends</span> keyof T, U&gt; = Omit&lt;T, K&gt; &amp; &#123; [P <span class="keyword">in</span> keyof Pick&lt;T, K&gt;]: U &#125;;</span><br><span class="line"><span class="keyword">type</span> NativeButtonProps = BaseButtonProps &amp; ButtonHTMLAttributes&lt;HTMLElement&gt;</span><br><span class="line"><span class="keyword">type</span> AnchorButtonProps = BaseButtonProps &amp; AnchorHTMLAttributes&lt;HTMLElement&gt;</span><br><span class="line"><span class="keyword">type</span> ButtonPropsOrigin = Partial&lt;NativeButtonProps &amp; AnchorButtonProps&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> ButtonProps = OverrideProperty&lt;ButtonPropsOrigin, <span class="string">&#x27;type&#x27;</span>, <span class="string">&#x27;primary&#x27;</span> | <span class="string">&#x27;default&#x27;</span> | <span class="string">&#x27;danger&#x27;</span> | <span class="string">&#x27;link&#x27;</span>&gt;</span><br><span class="line"><span class="keyword">const</span> Button:FC&lt;ButtonProps&gt; = <span class="function">(<span class="params">props</span>) =&gt;</span>&#123;</span><br><span class="line">  ....</span><br><span class="line">&#125;</span><br><span class="line">&lt;Button <span class="keyword">type</span>=<span class="string">&#x27;success | default ...&#x27;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-StackOverflow-Link"><a href="#5-StackOverflow-Link" class="headerlink" title="5. StackOverflow Link"></a>5. <a href="https://stackoverflow.com/questions/41285211/overriding-interface-property-type-defined-in-typescript-d-ts-file">StackOverflow Link</a></h1>]]></content>
+      <categories>
+        <category>TypeScript</category>
+      </categories>
+      <tags>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScirpt Native export excel</title>
+    <url>/eternallycyf/JavaScirpt%20export%20excel/</url>
+    <content><![CDATA[<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>下载表格<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;download()&quot;</span>&gt;</span>下载<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>上传表格<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;upload()&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="download-excel"><a href="#download-excel" class="headerlink" title="download excel"></a>download excel</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> tableData = <span class="string">&#x27;表格数据&#x27;</span></span><br><span class="line">      <span class="keyword">let</span> downloadLink = <span class="built_in">document</span>.createElement(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">      <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([<span class="string">&#x27;\ufeff&#x27;</span>, tableData], &#123; <span class="attr">type</span>: <span class="string">&#x27;application/vnd.ms-excel&#x27;</span> &#125;);</span><br><span class="line">      downloadLink.href = URL.createObjectURL(blob)</span><br><span class="line">      downloadLink.download = <span class="string">&#x27;1.xls&#x27;</span></span><br><span class="line">      downloadLink.click()</span><br><span class="line">      URL.revokeObjectURL(downloadLink.href)</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> fileDom = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;file&#x27;</span>)</span><br><span class="line">  <span class="keyword">let</span> files = fileDom.files[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e.target.result);</span><br><span class="line">  &#125;</span><br><span class="line">  reader.readAsText(files);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+</search>
