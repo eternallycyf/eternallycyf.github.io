@@ -1671,10 +1671,7 @@ figure.highlight pre .javascript .function {
 #article-container pre[class*='language-'].line-numbers > code {
   position: relative;
   line-height: 1.6;
-  white-space: inherit;
-  word-wrap: normal;
-  word-break: normal;
-  overflow-wrap: normal;
+  white-space: pre-wrap;
 }
 #article-container pre[class*='language-'].line-numbers .line-numbers-rows {
   position: absolute;
@@ -1985,6 +1982,41 @@ pre[class*='language-'] .token.italic {
 }
 #article-container figure.highlight .highlight-tools .code-lang {
   left: 75px;
+}
+#article-container .code-expand-btn {
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  background: var(--hlexpand-bg);
+  text-align: center;
+  font-size: var(--global-font-size);
+  cursor: pointer;
+}
+#article-container .code-expand-btn i {
+  padding: 6px 0;
+  color: var(--hlnumber-color);
+  -webkit-animation: code-expand-key 1.2s infinite;
+  -moz-animation: code-expand-key 1.2s infinite;
+  -o-animation: code-expand-key 1.2s infinite;
+  -ms-animation: code-expand-key 1.2s infinite;
+  animation: code-expand-key 1.2s infinite;
+}
+#article-container .code-expand-btn.expand-done > i {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+#article-container .code-expand-btn.expand-done + table,
+#article-container .code-expand-btn.expand-done + pre {
+  margin-bottom: 1.8em;
+}
+#article-container .code-expand-btn:not(.expand-done) ~ table,
+#article-container .code-expand-btn:not(.expand-done) ~ pre {
+  overflow: hidden;
+  height: 200px;
 }
 @-moz-keyframes code-expand-key {
   0% {

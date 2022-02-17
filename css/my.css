@@ -54,3 +54,6 @@ ul.card-category-list,
 /* 背景颜色 */
   background: #e6e6fa;
 }
+#article-container code {
+  background: #c71585 !important;
+}
