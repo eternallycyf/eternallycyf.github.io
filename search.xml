@@ -198,6 +198,268 @@
       </tags>
   </entry>
   <entry>
+    <title>ReactNative遇到的深坑和搭建项目建构</title>
+    <url>/eternallycyf/ReactNative%E9%81%87%E5%88%B0%E7%9A%84%E6%B7%B1%E5%9D%91%E5%92%8C%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BB%BA%E6%9E%84/</url>
+    <content><![CDATA[<h2 id="1-导读"><a href="#1-导读" class="headerlink" title="1.导读"></a>1.导读</h2><ul>
+<li>在搭建 <code>React Native</code> 的途中真的是遇到太多问题了</li>
+<li>。。。这里记录一下</li>
+<li>使用的操作系统是 <code>Macos Monterey</code></li>
+<li>可以直接克隆我的仓库 修改成自己的架构<ul>
+<li><a href="https://github.com/eternallycyf/react-native-dva-template">仓库地址</a></li>
+<li>已经集成了 <ul>
+<li>antd/react-native </li>
+<li>dva </li>
+<li>axios </li>
+<li>react-native-config (区分开发环境)</li>
+<li>eslint</li>
+<li>typescript</li>
+<li>reactnavigation (路由导航)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-bug汇总"><a href="#2-bug汇总" class="headerlink" title="2.bug汇总"></a>2.bug汇总</h2><ul>
+<li>先进行下一步,遇到问题再回来看看</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># 搭建环境下载依赖一直失败</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//www.react-native.cn/docs/environment-setup</span></span><br><span class="line"># yarn ios 运行模拟器时候没有 app</span><br><span class="line"><span class="comment">// 需要给权限</span></span><br><span class="line">sudo chown -R eternallycyf ~/react_native_project</span><br><span class="line">chmod <span class="number">777</span> RN</span><br><span class="line"># 运行报错</span><br><span class="line"><span class="comment">// 端口在运行了 杀下端口</span></span><br><span class="line"></span><br><span class="line"># react native <span class="keyword">debugger</span> 显示一片空白</span><br><span class="line"><span class="comment">// react-devtools 版本冲突 请卸载全局 react-devtools</span></span><br><span class="line"><span class="comment">// 并按照react native debugger 页面提示的版本 安装</span></span><br><span class="line"><span class="comment">// npm i -g react-devtools@^4.13.0</span></span><br><span class="line"><span class="comment">// github 有 issue</span></span><br><span class="line"># react native <span class="keyword">debugger</span> 网络请求不显示</span><br><span class="line"><span class="comment">// 他这个需要先手动 在 element页面 右键点击 enable network 开启</span></span><br><span class="line"></span><br><span class="line"># npm加入其他包的时候请重新 pod install 或者直接重新运行打包</span><br><span class="line"></span><br><span class="line"># react-native-config ios配置成功 安卓config是一个空对象或者一个杂乱的对象</span><br><span class="line"><span class="comment">// 请确定 </span></span><br><span class="line"><span class="comment">// 1. android/app/build.gradle 设置了 resValue &quot;string&quot;, &quot;build_config_package&quot;, &quot;com.rn&quot;</span></span><br><span class="line"><span class="comment">//                                   (他的值不是固定的 是另一个文件里的字段)</span></span><br><span class="line"><span class="comment">// 2. android/app/src/main/AndroidManifest.xml &lt;manifest package=&quot;com.rn&quot;&gt;  </span></span><br><span class="line"><span class="comment">// 其实这个就在npm首页有写 当时我也没有看到 找了很久 。。。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-准备阶段"><a href="#3-准备阶段" class="headerlink" title="3.准备阶段"></a>3.准备阶段</h2><h3 id="基本环境的安装"><a href="#基本环境的安装" class="headerlink" title="基本环境的安装"></a>基本环境的安装</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npx react-native init AwesomeProject</span><br><span class="line">npx react-native init RN --template react-native-template-typescript</span><br><span class="line">yarn android </span><br><span class="line">yarn ios</span><br><span class="line"># 具体流程: 参考官网</span><br><span class="line"><span class="comment">// 按着官网的先一部一部来 把基础必备的东西先装了 </span></span><br><span class="line"><span class="comment">// 例如: Xcode Watchman Node CocoaPods</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//www.react-native.cn/docs/environment-setup</span></span><br><span class="line"># 安装过程中遇到的问题: 指定镜像(必须 或者自己代理)</span><br><span class="line"><span class="comment">// 参考这篇文章 基本解决的搭建环境的所有问题</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//www.jianshu.com/p/412d760bcacd</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Android模拟器"><a href="#Android模拟器" class="headerlink" title="Android模拟器"></a>Android模拟器</h3><ul>
+<li>这里就不提这个了</li>
+<li>按照官网一步一步操作 &amp;&amp; 有一个梯子 不然下载应用网站打不开 或者找第三方的地方下载</li>
+<li>其次 配置环境变量时 <code>open ~/.bash_profile </code> 或  <code>open ~/.zshrc</code> 打不开<ul>
+<li>可能是自己电脑之前配置有问题 </li>
+<li>用这个命令打开 <code>open -e ~/.bash_profile</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h4 id="我的方案"><a href="#我的方案" class="headerlink" title="我的方案"></a>我的方案</h4><ul>
+<li>我这里最终搭建的体系是采用 <code>react-native-debugger</code> 和 <code>ios</code>模拟器结合<ul>
+<li><code>react-native-debugger 集成了 console.log network redux</code> 调试工具等功能</li>
+<li><code>ios</code> 模拟器 支持提示错误 元素审查 等功能</li>
+<li>基本满足调试的所有需要了 </li>
+</ul>
+</li>
+<li><img class="inline-img" src="https://user-images.githubusercontent.com/3001525/29451479-6621bf1a-83c8-11e7-8ebb-b4e98b1af91c.png" style="height:300px"/></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># brew install --cask react-native-<span class="keyword">debugger</span></span><br><span class="line">然后直接打开应用就行 <span class="comment">// 注意他直接是一个应用 不是直接运行在浏览器的</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="调试如何使用"><a href="#调试如何使用" class="headerlink" title="调试如何使用"></a>调试如何使用</h4><blockquote>在调试中遇到的bug我统一放在第二章说明了,有问题话往前翻</blockquote>
+
+<ul>
+<li>刷新模拟器:两种方法<ul>
+<li>1.按两下 <code>R || r</code> 快速刷新</li>
+<li>2.手动在模拟器操作<ul>
+<li><code>ios: command+R || command+D  =&gt; reload</code></li>
+<li><code>android: command + m reload</code> (模拟器在 应用 <code>=&gt; avd =&gt; manager</code>里面)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>审查元素<ul>
+<li><code>commend+d</code></li>
+<li><code>show Inspector</code></li>
+<li>点击元素</li>
+</ul>
+</li>
+<li><code>console.log</code><ul>
+<li>1.直接使用 <code>react-native-debugger</code> 调试工具<code>console.log</code> 界面就能看到了</li>
+<li>2.运行模拟器的终端</li>
+<li>3.<code>command+D</code><ul>
+<li><code>Debug with Chrome</code></li>
+<li>切换到<code>console</code>界面</li>
+<li>将<code>top</code>切换为 <code>debug...</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网络请求<ul>
+<li><code>react native debugger</code></li>
+<li>在 <code>Element</code> 页面 右键开启 <code>enable network</code></li>
+<li>然后在 <code>network</code> 页面刷新就能看到网络请求了</li>
+</ul>
+</li>
+<li><code>redux|dva</code><ul>
+<li>在<code>react native debugger</code> 页面就能看到了</li>
+</ul>
+</li>
+</ul>
+<h4 id="其他调试方案单独步骤"><a href="#其他调试方案单独步骤" class="headerlink" title="其他调试方案单独步骤"></a>其他调试方案单独步骤</h4><blockquote>如果按照react-native-debugger方案,不需要看这里的内容,直接跳过</blockquote>
+
+<h5 id="ts语法提示"><a href="#ts语法提示" class="headerlink" title="ts语法提示"></a>ts语法提示</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npm install --save @types/react-native</span><br><span class="line"><span class="comment">// 根目录构建tsconfig.json文件</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;allowJs&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;allowSyntheticDefaultImports&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;esModuleInterop&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;isolatedModules&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;jsx&quot;</span>: <span class="string">&quot;react&quot;</span>,</span><br><span class="line">    <span class="string">&quot;lib&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;es6&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;moduleResolution&quot;</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">    <span class="string">&quot;noEmit&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;strict&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;esnext&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;exclude&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;node_modules&quot;</span>,</span><br><span class="line">    <span class="string">&quot;babel.config.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;metro.config.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;jest.config.js&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vscode 安装 react native tools 插件</span></span><br><span class="line"><span class="comment">// 打开vscode开发者工具 就可以看到网络请求了</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="react调试工具"><a href="#react调试工具" class="headerlink" title="react调试工具"></a>react调试工具</h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// npm i -g react-devtools@^4.13.0</span></span><br><span class="line"><span class="comment">// 终端输入命令 react-devtools</span></span><br><span class="line"><span class="comment">// 在模拟器刷新后 react-devtools 就有内容了</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">__tests__</span><br><span class="line">.bundle</span><br><span class="line">android</span><br><span class="line">ios</span><br><span class="line">node_modules</span><br><span class="line">.buckconfig</span><br><span class="line">.flowconfig</span><br><span class="line">.ruby-version</span><br><span class="line">.watchmanconfig</span><br><span class="line">App.js</span><br><span class="line">app.json</span><br><span class="line">babel.config.js</span><br><span class="line">Gemfile</span><br><span class="line">Gemfile.lock</span><br><span class="line">index.js</span><br><span class="line">metro.config.js</span><br><span class="line">package.json</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-插件集成"><a href="#4-插件集成" class="headerlink" title="4. 插件集成"></a>4. 插件集成</h2><h3 id="dva"><a href="#dva" class="headerlink" title="dva"></a>dva</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add dva-core-ts react-redux @types/react-redux</span><br><span class="line"><span class="comment">// 随后引入dva就可以了</span></span><br><span class="line"><span class="keyword">import</span> &#123;create, Model&#125; <span class="keyword">from</span> <span class="string">&#x27;dva-core-ts&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> createLoading <span class="keyword">from</span> <span class="string">&#x27;dva-loading-ts&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> models <span class="keyword">from</span> <span class="string">&#x27;@/models/index&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;@/config/http&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> home, &#123;HomeModelType&#125; <span class="keyword">from</span> <span class="string">&#x27;@/models/home&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;Animated&#125; <span class="keyword">from</span> <span class="string">&#x27;react-native&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> modelExtend = <span class="built_in">require</span>(<span class="string">&#x27;dva-model-extend&#x27;</span>).default;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.创建实例</span></span><br><span class="line"><span class="keyword">const</span> app = create(&#123;</span><br><span class="line">  <span class="attr">onError</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;e&#x27;</span>, e);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 2.加载model对象</span></span><br><span class="line">models.forEach(<span class="function"><span class="params">model</span> =&gt;</span> &#123;</span><br><span class="line">  app.model(model);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(createLoading());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.启动dva</span></span><br><span class="line">app.start();</span><br><span class="line"><span class="comment">// 4.导出dva的数据</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app._store;</span><br><span class="line"></span><br><span class="line">interface Cached &#123;</span><br><span class="line">  [key: string]: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cached: Cached = &#123;</span><br><span class="line">  <span class="attr">home</span>: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">registerModel</span>(<span class="params">model: Model</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!cached[model.namespace]) &#123;</span><br><span class="line">    app.model(model);</span><br><span class="line">    cached[model.namespace] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createModel</span>(<span class="params">namespace: string</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> model: HomeModelType = modelExtend(home, &#123;</span><br><span class="line">    namespace,</span><br><span class="line">    <span class="attr">state</span>: &#123;</span><br><span class="line">      <span class="attr">scrollValue</span>: <span class="keyword">new</span> Animated.Value(<span class="number">0</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  registerModel(model);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="react-native-config"><a href="#react-native-config" class="headerlink" title="react-native-config"></a>react-native-config</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 区分多环境 需要重新打包</span></span><br><span class="line">yarn add react-native-config</span><br><span class="line"># 配置 参考Npm官网就可以了 </span><br><span class="line"><span class="comment">// 如果 ios 可以显示 , android 打印结果为空对象或者一个对象里有一堆无关的数据</span></span><br><span class="line"><span class="comment">// 请确定自己正确配置了 resValue  这个值是另一个文件中的变量</span></span><br><span class="line"><span class="comment">// 这里的 bug 解决方式放在最前面了</span></span><br><span class="line">...</span><br><span class="line">npx react-native link react-native-config</span><br><span class="line"># 根目录新建 .env</span><br><span class="line">API_URL=https:<span class="comment">//myapi.com</span></span><br><span class="line"># App.tsx</span><br><span class="line"><span class="keyword">import</span> Config <span class="keyword">from</span> <span class="string">&#x27;react-native-config&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-plugin-module-resolve"><a href="#babel-plugin-module-resolve" class="headerlink" title="babel-plugin-module-resolve"></a>babel-plugin-module-resolve</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">yarn add babel-plugin-<span class="built_in">module</span>-resolver</span><br><span class="line"># babel.config.js</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">presets</span>: [<span class="string">&#x27;module:metro-react-native-babel-preset&#x27;</span>],</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">&#x27;module-resolver&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">root</span>: [<span class="string">&#x27;./src&#x27;</span>],</span><br><span class="line">        <span class="attr">alias</span>: &#123;</span><br><span class="line">          <span class="string">&#x27;@/utils&#x27;</span>: <span class="string">&#x27;./src/utils&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@/pages&#x27;</span>: <span class="string">&#x27;./src/pages&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@/navigator&#x27;</span>: <span class="string">&#x27;./src/navigator&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@/models&#x27;</span>: <span class="string">&#x27;./src/models&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@/config&#x27;</span>: <span class="string">&#x27;./src/config&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@/components&#x27;</span>: <span class="string">&#x27;./src/components&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@/assets&#x27;</span>: <span class="string">&#x27;./src/assets&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br><span class="line"># tsconfig.json</span><br><span class="line"> <span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;./src&quot;</span>,                      </span><br><span class="line"> <span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;@/assets/*&quot;</span>: [<span class="string">&quot;assets/*&quot;</span>],</span><br><span class="line">      <span class="string">&quot;@/components/*&quot;</span>: [<span class="string">&quot;components/*&quot;</span>],</span><br><span class="line">      <span class="string">&quot;@/config/*&quot;</span>: [<span class="string">&quot;config/*&quot;</span>],</span><br><span class="line">      <span class="string">&quot;@/models/*&quot;</span>: [<span class="string">&quot;models/*&quot;</span>],</span><br><span class="line">      <span class="string">&quot;@/navigator/*&quot;</span>: [<span class="string">&quot;navigator/*&quot;</span>],</span><br><span class="line">      <span class="string">&quot;@/pages/*&quot;</span>: [<span class="string">&quot;pages/*&quot;</span>],</span><br><span class="line">      <span class="string">&quot;@/utils/*&quot;</span>: [<span class="string">&quot;utils/*&quot;</span>]</span><br><span class="line"> &#125;,       </span><br></pre></td></tr></table></figure>
+
+<h3 id="antd-reactNative"><a href="#antd-reactNative" class="headerlink" title="antd/reactNative"></a>antd/reactNative</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; View, Text, Button &#125; <span class="keyword">from</span> <span class="string">&quot;react-native&quot;</span></span><br><span class="line"><span class="keyword">import</span> &#123; Icon &#125; <span class="keyword">from</span> <span class="string">&#x27;@ant-design/react-native&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="React-Navigation"><a href="#React-Navigation" class="headerlink" title="React Navigation"></a>React Navigation</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">这个直接参考官方文档就可以了 我没有遇到什么问题</span><br><span class="line">只是有些API有版本问题</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-参考链接"><a href="#5-参考链接" class="headerlink" title="5. 参考链接"></a>5. 参考链接</h2><ul>
+<li><a href="https://www.react-native.cn/docs/environment-setup">ReactNative#官网搭建开发环境文档</a></li>
+<li><a href="https://www.jianshu.com/p/412d760bcacd">搭建环境问题的解决</a></li>
+<li><a href="https://github.com/eternallycyf/react-native-dva-template">我的reactNative项目模板仓库</a></li>
+<li><a href="https://dvajs.com/guide/#%E7%89%B9%E6%80%A7">dva</a></li>
+<li><a href="https://www.npmjs.com/package/react-native-config">react-native-config</a></li>
+<li><a href="https://www.npmjs.com/package/babel-plugin-module-resolve">babel-plugin-module-resolve</a></li>
+<li><a href="https://rn.mobile.ant.design/index-cn">antd-RN</a></li>
+<li><a href="https://reactnavigation.org/">React Navigation</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用在线vscode打开github仓库</title>
+    <url>/eternallycyf/%E7%94%A8%E5%9C%A8%E7%BA%BFvscode%E6%89%93%E5%BC%80github%E4%BB%93%E5%BA%93/</url>
+    <content><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>作为一个 <code>github</code> 的使用者。。。我竟然不知道 略显尴尬</li>
+<li>之前一直是通过 chrome 插件 <code>Octotree-Github code tree</code>  来查看仓库文件结构</li>
+<li>和 <code>vscode</code> 打开 简直 <code>low</code> 暴了</li>
+<li>如果你也不知道那就赶紧来试试吧</li>
+</ul>
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><ul>
+<li><ol>
+<li>直接在网址 xxx.github.com 的 github 后面加 <code>1s</code></li>
+</ol>
+<ul>
+<li>例如: <a href="https://github.com/conwnet/github1s">https://github.com/conwnet/github1s</a></li>
+<li>To: <a href="https://github1s.com/conwnet/github1s">https://github1s.com/conwnet/github1s</a></li>
+</ul>
+</li>
+<li><ol start="2">
+<li>直接按中文的 句号按钮</li>
+</ol>
+<ul>
+<li>有的网址可以有的网址不行</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://github.com/conwnet/github1s">github1s</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手写axios</title>
+    <url>/eternallycyf/%E6%89%8B%E5%86%99axios/</url>
+    <content><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>这里主要实现了 <ul>
+<li>构建<code>axios</code>对象和函数</li>
+<li>发送网络请求:<code>ajax</code></li>
+<li>拦截器</li>
+<li>适配器</li>
+<li><code>CancolToken</code>功能</li>
+</ul>
+</li>
+</ul>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><ul>
+<li>这里直接使用<code>esmodule</code>, 需要注意<code>import</code>时候不能省略 <code>.js</code><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span> 发送请求 <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;./index.js&#x27;</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="comment">// fetch(&#x27;./db.json&#x27;).then(async (res) =&gt; console.log(await res.json()))</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    axios.interceptors.request.use(<span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params">config</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;请求拦截器 成功 - 1号&#x27;</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> config;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;, <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params">error</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;请求拦截器 失败 - 1号&#x27;</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    axios.interceptors.request.use(<span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params">config</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;请求拦截器 成功 - 2号&#x27;</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> config;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;, <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params">error</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;请求拦截器 失败 - 2号&#x27;</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    axios.interceptors.response.use(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;响应拦截器 成功 1号&#x27;</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> response;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;响应拦截器 失败 1号&#x27;</span>)</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    axios.interceptors.response.use(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;响应拦截器 成功 2号&#x27;</span>)</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> response;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="built_in">console</span>.log(<span class="string">&#x27;响应拦截器 失败 2号&#x27;</span>)</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> btns = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;button&#x27;</span>)</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">let</span> cancel = <span class="literal">null</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    btns[<span class="number">0</span>].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">if</span> (cancel !== <span class="literal">null</span>) &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        cancel();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">let</span> cancelToken = <span class="keyword">new</span> axios.CancelToken(</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="function"><span class="keyword">function</span> (<span class="params">c</span>) </span>&#123; cancel = c &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      axios(&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">url</span>: <span class="string">&#x27;http://localhost:3000/posts&#x27;</span>,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="comment">// url: &#x27;./db.json&#x27;,</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">cancelToken</span>: cancelToken</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;).then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        cancel = <span class="literal">null</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="built_in">console</span>.log(response.data);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;)</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><ul>
+<li>导出构造函数<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;./Axios.js&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> axios</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Axios-js"><a href="#Axios-js" class="headerlink" title="Axios.js"></a>Axios.js</h3><ul>
+<li>构建了<code>Axios</code>的类,并创造了他的实例对象</li>
+<li>此时就可以 <code>axios.get</code> or <code>axios(&#123;method:&quot;GET&quot;&#125;)</code> <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; request &#125; <span class="keyword">from</span> <span class="string">&#x27;./request.js&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; CancelToken &#125; <span class="keyword">from</span> <span class="string">&#x27;./CancelToken.js&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; InterceptorManager &#125; <span class="keyword">from</span> <span class="string">&#x27;./interceptor.js&#x27;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Axios</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">config</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.defaults = config;</span><br><span class="line">    <span class="built_in">this</span>.interceptors = &#123;</span><br><span class="line">      <span class="attr">request</span>: <span class="keyword">new</span> InterceptorManager(),</span><br><span class="line">      <span class="attr">response</span>: <span class="keyword">new</span> InterceptorManager(),</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">request</span>(<span class="params">config</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request.call(<span class="built_in">this</span>, config)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params">config</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.request(&#123; <span class="attr">method</span>: <span class="string">&quot;GET&quot;</span> &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">post</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.request(&#123; <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span> &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createInstance</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> context = <span class="keyword">new</span> Axios(config);</span><br><span class="line">  <span class="keyword">let</span> instance = Axios.prototype.request.bind(context);</span><br><span class="line">  <span class="keyword">let</span> functionNamesArray = <span class="built_in">Object</span>.getOwnPropertyNames(Axios.prototype)</span><br><span class="line">  functionNamesArray.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    instance[item] = Axios.prototype[item].bind(context)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">Object</span>.keys(context).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    instance[key] = context[key];</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> instance</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> axios = createInstance()</span><br><span class="line">axios.CancelToken = CancelToken</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> axios</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="dispatchRequest-js"><a href="#dispatchRequest-js" class="headerlink" title="dispatchRequest.js"></a>dispatchRequest.js</h3><ul>
+<li>这里用于调用适配器<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; xhrAdapter &#125; <span class="keyword">from</span> <span class="string">&#x27;./xhrAdapter.js&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatchRequest</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> xhrAdapter(config).then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;, <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> error;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="xhrAdapter-js"><a href="#xhrAdapter-js" class="headerlink" title="xhrAdapter.js"></a>xhrAdapter.js</h3><ul>
+<li>适配器:用于切换使用 <code>node</code> 版本还是 <code>js</code> 版本</li>
+<li>这里指写了 <code>js</code> 版本<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">xhrAdapter</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(config.method, config.url);</span><br><span class="line">    xhr.send();</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">          resolve(&#123;</span><br><span class="line">            <span class="attr">config</span>: config,</span><br><span class="line">            <span class="attr">data</span>: xhr.responseText,</span><br><span class="line">            <span class="attr">headers</span>: xhr.getAllResponseHeaders(),</span><br><span class="line">            <span class="attr">request</span>: xhr,</span><br><span class="line">            <span class="attr">status</span>: xhr.status,</span><br><span class="line">            <span class="attr">statusText</span>: xhr.statusText</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;请求失败 失败的状态码为&#x27;</span> + xhr.status));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (config.cancelToken) &#123;</span><br><span class="line">      config.cancelToken.promise.then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">        xhr.abort();</span><br><span class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;请求已经被取消&#x27;</span>))</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="interceptor-js"><a href="#interceptor-js" class="headerlink" title="interceptor.js"></a>interceptor.js</h3><ul>
+<li>拦截器的实例对象<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">InterceptorManager</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.handlers = [];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">use</span>(<span class="params">fulfilled, rejected</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.handlers.push(&#123; fulfilled, rejected &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="request-js"><a href="#request-js" class="headerlink" title="request.js"></a>request.js</h3><ul>
+<li>这里是关于拦截器的核心代码</li>
+<li>可以看出是用一个数组维护 响应拦截器 和 请求拦截器</li>
+<li>放的时候 请求拦截器 <code>unshift</code> , 相应拦截器 <code>push</code></li>
+<li>取的时候 请求拦截器 <code>shift</code> , 相应拦截器 <code>shift</code></li>
+<li>因此当多个拦截器执行的时候 请求拦截器的顺序是反的 相应拦截器的正的<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; dispatchRequest &#125; <span class="keyword">from</span> <span class="string">&#x27;./dispatchRequest.js&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> promise = <span class="built_in">Promise</span>.resolve(config);</span><br><span class="line">  <span class="keyword">let</span> chains = [dispatchRequest, <span class="literal">undefined</span>];</span><br><span class="line">  <span class="built_in">this</span>.interceptors.request.handlers.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    chains.unshift(item.fulfilled, item.rejected)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">this</span>.interceptors.response.handlers.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    chains.push(item.fulfilled, item.rejected);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">while</span> (chains.length) &#123;</span><br><span class="line">    promise = promise.then(chains.shift(), chains.shift());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> promise;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="CancelToken-js"><a href="#CancelToken-js" class="headerlink" title="CancelToken.js"></a>CancelToken.js</h3><ul>
+<li>闭包的经典应用</li>
+<li>将<code>promise</code>的控制权交于外界 使用者控制</li>
+<li>使用者一旦调用方法 <code>promise</code>就可以自动触发 <code>promise.resolve</code></li>
+<li>随后只要在 <code>xhr</code> 网络请求中 调用 <code>xhr.abort()</code> 来中断请求<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">CancelToken</span>(<span class="params">executor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> resolvePromise;</span><br><span class="line">  <span class="built_in">this</span>.promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    resolvePromise = resolve</span><br><span class="line">  &#125;);</span><br><span class="line">  executor(<span class="function">() =&gt;</span> resolvePromise());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://github.com/eternallycyf/eternallcyf-axios">上述代码的仓库</a></li>
+<li><a href="https://github.com/axios/axios">axios</a></li>
+<li><a href="https://axios-http.com/zh/">axios-doc</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>soundCode</category>
+      </categories>
+      <tags>
+        <tag>soundCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>有趣的GitHub-Badge</title>
+    <url>/eternallycyf/%E6%9C%89%E8%B6%A3%E7%9A%84GitHub-Badge/</url>
+    <content><![CDATA[<h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ul>
+<li>大家一定在浏览 <code>github</code> 的时候有看到过这样漂亮的徽标</li>
+<li>其实他的使用方式也非常简单</li>
+<li><img class="inline-img" src="/img/badge.jpg" style="height:300px"/></li>
+</ul>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><ul>
+<li><a href="https://simpleicons.org/">Simple Icons官网图标列表</a><ul>
+<li>这里可以看到各式各样的图标</li>
+<li>而他的名字就是后续配置需要的logo名</li>
+<li>此外基础配色也最好以它的为准 比较美观</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># 字段配置如下</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//shields.io/badge/左边文字-右边文字-右边颜色?logo=图标名称&amp;logoColor=ffffff&amp;style=样式</span></span><br><span class="line"># demo =&gt; github 徽标</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//img.shields.io/badge/-fff?style=flat-square&amp;logo=Github&amp;logoColor=000</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此外。还有些细节配置<ul>
+<li>徽章实体风格: <code>style= plastic | flat | flag-square | for-the-badge | social</code></li>
+<li>外观有不同的效果 自己可以挨个尝试下</li>
+</ul>
+</li>
+<li>其次 <code>badge</code> 后边 也可以直接跟一个 <code>svg</code> 地址 </li>
+</ul>
+<h2 id="github主页使用"><a href="#github主页使用" class="headerlink" title="github主页使用"></a>github主页使用</h2><ul>
+<li>创建一个和自己<code>github</code>名字 同名的仓库</li>
+<li>在这个仓库里创建 <code>README.md</code></li>
+<li>在这个里面的内容就自动展示在首页啦</li>
+</ul>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>自己搭建一个gitlab</title>
     <url>/eternallycyf/%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AAgitlab/</url>
     <content><![CDATA[<h1 id="自己搭建一个gitlab"><a href="#自己搭建一个gitlab" class="headerlink" title="自己搭建一个gitlab"></a>自己搭建一个gitlab</h1><blockquote>这里主要用到了jenkins docker-compose 和 gitlab提供的docker镜像来搭建的</blockquote>
