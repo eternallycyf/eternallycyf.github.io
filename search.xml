@@ -1,184 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>平凡之路</title>
-    <url>/eternallycyf/%E5%B9%B3%E5%87%A1%E4%B9%8B%E8%B7%AF/</url>
-    <content><![CDATA[<h2 id="雪泥鸿爪"><a href="#雪泥鸿爪" class="headerlink" title="雪泥鸿爪"></a>雪泥鸿爪</h2><h3 id="Long-Long-Ago"><a href="#Long-Long-Ago" class="headerlink" title="Long-Long-Ago"></a>Long-Long-Ago</h3><div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>Long-Long-Ago</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>PS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>AE</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>HTML</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>CSS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>JavaScript</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>Git</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>MarkDown</p>
-</div></div></div>
-
-<h3 id="2020"><a href="#2020" class="headerlink" title="2020"></a>2020</h3><div class="timeline cornflowerblue"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2020</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>04-10</p>
-</div></div><div class='timeline-item-content'><p>Hexo</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>04-10</p>
-</div></div><div class='timeline-item-content'><p>搭建博客</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>04-14</p>
-</div></div><div class='timeline-item-content'><p>HTML5</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>04-15</p>
-</div></div><div class='timeline-item-content'><p>CSS3</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>04-16</p>
-</div></div><div class='timeline-item-content'><p>Flex布局</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>04-20</p>
-</div></div><div class='timeline-item-content'><p>ES6</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>05-01</p>
-</div></div><div class='timeline-item-content'><p>jQuery</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>05-05</p>
-</div></div><div class='timeline-item-content'><p>Ajax</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>05-15</p>
-</div></div><div class='timeline-item-content'><p>Axios</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-12</p>
-</div></div><div class='timeline-item-content'><p>canvas</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-17</p>
-</div></div><div class='timeline-item-content'><p>svg</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-23</p>
-</div></div><div class='timeline-item-content'><p>bootStrap</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-25</p>
-</div></div><div class='timeline-item-content'><p>less</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-26</p>
-</div></div><div class='timeline-item-content'><p>PostCSS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-01</p>
-</div></div><div class='timeline-item-content'><p>NPM</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-05</p>
-</div></div><div class='timeline-item-content'><p>YARN</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-05</p>
-</div></div><div class='timeline-item-content'><p>Babel</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-05</p>
-</div></div><div class='timeline-item-content'><p>NodeJS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-12</p>
-</div></div><div class='timeline-item-content'><p>Mysql</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-18</p>
-</div></div><div class='timeline-item-content'><p>PHP</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-23</p>
-</div></div><div class='timeline-item-content'><p>Apache</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-23</p>
-</div></div><div class='timeline-item-content'><p>MACOS操作系统</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-19</p>
-</div></div><div class='timeline-item-content'><p>Express</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-25</p>
-</div></div><div class='timeline-item-content'><p>PostgreSQL</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-06</p>
-</div></div><div class='timeline-item-content'><p>MongoDB</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-22</p>
-</div></div><div class='timeline-item-content'><p>Redis</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-27</p>
-</div></div><div class='timeline-item-content'><p>Redis</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>11-15</p>
-</div></div><div class='timeline-item-content'><p>gulp</p>
-</div></div></div>
-
-<h3 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021</h3><div class="timeline green"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2021</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>01-07</p>
-</div></div><div class='timeline-item-content'><p>Vue</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>02-03</p>
-</div></div><div class='timeline-item-content'><p>VueX</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>02-05</p>
-</div></div><div class='timeline-item-content'><p>Vue Router</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>02-10</p>
-</div></div><div class='timeline-item-content'><p>Webpack</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>05-07</p>
-</div></div><div class='timeline-item-content'><p>NuxtJS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>05-11</p>
-</div></div><div class='timeline-item-content'><p>微信小程序</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>05-15</p>
-</div></div><div class='timeline-item-content'><p>UniApp</p>
-</div></div></div>
-
-<div class="timeline purple"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2021</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-01</p>
-</div></div><div class='timeline-item-content'><p>React</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-12</p>
-</div></div><div class='timeline-item-content'><p>React Router</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-15</p>
-</div></div><div class='timeline-item-content'><p>React Hooks</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-20</p>
-</div></div><div class='timeline-item-content'><p>TypeScript</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-24</p>
-</div></div><div class='timeline-item-content'><p>NextJS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-26</p>
-</div></div><div class='timeline-item-content'><p>SASS</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>06-27</p>
-</div></div><div class='timeline-item-content'><p>Jest</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>07-03</p>
-</div></div><div class='timeline-item-content'><p>写一个组件库(模仿antd)</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>07-11</p>
-</div></div><div class='timeline-item-content'><p>Taro</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>07-14</p>
-</div></div><div class='timeline-item-content'><p>Vuepress</p>
-</div></div></div>
-
-<div class="timeline orange"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2021</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>08-27</p>
-</div></div><div class='timeline-item-content'><p>Redux</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-01</p>
-</div></div><div class='timeline-item-content'><p>Dva</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-03</p>
-</div></div><div class='timeline-item-content'><p>Umi</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-05</p>
-</div></div><div class='timeline-item-content'><p>Stylus</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-07</p>
-</div></div><div class='timeline-item-content'><p>Lottie</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-08</p>
-</div></div><div class='timeline-item-content'><p>linux</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-09</p>
-</div></div><div class='timeline-item-content'><p>nginx</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-10</p>
-</div></div><div class='timeline-item-content'><p>docker </p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-17</p>
-</div></div><div class='timeline-item-content'><p>买服务器</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-18</p>
-</div></div><div class='timeline-item-content'><p>CICD</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>09-22</p>
-</div></div><div class='timeline-item-content'><p>自己搭建一个gitlab</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-08</p>
-</div></div><div class='timeline-item-content'><p>Grid布局</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-12</p>
-</div></div><div class='timeline-item-content'><p>自己写一个vscode插件</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-17</p>
-</div></div><div class='timeline-item-content'><p>自己搭建一个脚手架</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-20</p>
-</div></div><div class='timeline-item-content'><p>Vite</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>10-21</p>
-</div></div><div class='timeline-item-content'><p>Vue 3.0</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>11-11</p>
-</div></div><div class='timeline-item-content'><p>ReactNative</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>12-02</p>
-</div></div><div class='timeline-item-content'><p>Axios源码解析</p>
-</div></div></div>
-
-<h3 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h3><div class="timeline pink"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2022</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>01-12</p>
-</div></div><div class='timeline-item-content'><p>JAVA基础</p>
-</div></div></div>
-
-<h2 id="心无旁骛"><a href="#心无旁骛" class="headerlink" title="心无旁骛"></a>心无旁骛</h2><div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>ThisYear</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>webpack 写一个插件</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>K8S</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>LeeCode</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>Redux源码解析</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>JS设计模式</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>Vue源码解析</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>React源码解析</p>
-</div></div></div>
-
-
-<h2 id="来日方长"><a href="#来日方长" class="headerlink" title="来日方长"></a>来日方长</h2><div class="timeline undefined"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>Future</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>Electron</p>
-</div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'></div></div><div class='timeline-item-content'><p>python3</p>
-</div></div></div>]]></content>
-      <categories>
-        <category>life</category>
-      </categories>
-      <tags>
-        <tag>life</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>kubernetes</title>
     <url>/eternallycyf/kubernetes/</url>
     <content><![CDATA[<h2 id="1-导读"><a href="#1-导读" class="headerlink" title="1. 导读"></a>1. 导读</h2><h3 id="know"><a href="#know" class="headerlink" title="know"></a>know</h3><ul>
@@ -1516,6 +1338,27 @@
       </tags>
   </entry>
   <entry>
+    <title>链表逆序两数相加</title>
+    <url>/eternallycyf/%E9%93%BE%E8%A1%A8%E9%80%86%E5%BA%8F%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
+    <content><![CDATA[<h2 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h2><ul>
+<li>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</li>
+<li>请你将两个数相加，并以相同形式返回一个表示和的链表。</li>
+<li>你可以假设除了数字 0 之外，这两个数都不会以 0 开头</li>
+</ul>
+<h2 id="2-解决方法"><a href="#2-解决方法" class="headerlink" title="2. 解决方法"></a>2. 解决方法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;ListNode&#125;</span> <span class="variable">l1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;ListNode&#125;</span> <span class="variable">l2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;ListNode&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addTwoNumbers = <span class="function"><span class="keyword">function</span> (<span class="params">l1, l2</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 虚拟头结点（构建新链表时的常用技巧）</span></span><br><span class="line">  <span class="keyword">let</span> dummy = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">  <span class="comment">// 指针 p 负责构建新链表</span></span><br><span class="line">  <span class="keyword">let</span> p = dummy;</span><br><span class="line">  <span class="comment">// 记录进位</span></span><br><span class="line">  <span class="keyword">let</span> carry = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// 开始执行加法，两条链表走完且没有进位时才能结束循环</span></span><br><span class="line">  <span class="keyword">while</span> (l1 != <span class="literal">null</span> || l2 != <span class="literal">null</span> || carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 先加上上次的进位</span></span><br><span class="line">    <span class="keyword">let</span> val = carry;</span><br><span class="line">    <span class="keyword">if</span> (l1 != <span class="literal">null</span>) &#123;</span><br><span class="line">      val += l1.val;</span><br><span class="line">      l1 = l1.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (l2 != <span class="literal">null</span>) &#123;</span><br><span class="line">      val += l2.val;</span><br><span class="line">      l2 = l2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理进位情况</span></span><br><span class="line">    carry = <span class="built_in">Math</span>.floor(val / <span class="number">10</span>);</span><br><span class="line">    val = val % <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 构建新节点</span></span><br><span class="line">    p.next = <span class="keyword">new</span> ListNode(val);</span><br><span class="line">    p = p.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 返回结果链表的头结点（去除虚拟头结点）</span></span><br><span class="line">  <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-题源"><a href="#3-题源" class="headerlink" title="3. 题源"></a>3. 题源</h2><ul>
+<li><a href="https://leetcode-cn.com/problems/add-two-numbers/">两数相加</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>拿硬币</title>
     <url>/eternallycyf/%E6%8B%BF%E7%A1%AC%E5%B8%81/</url>
     <content><![CDATA[<h2 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h2><ul>
@@ -1539,27 +1382,6 @@
 
 <h2 id="3-题源"><a href="#3-题源" class="headerlink" title="3. 题源"></a>3. 题源</h2><ul>
 <li>LCP 06. 拿硬币(<a href="https://leetcode-cn.com/problems/na-ying-bi/">https://leetcode-cn.com/problems/na-ying-bi/</a>)</li>
-</ul>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>链表逆序两数相加</title>
-    <url>/eternallycyf/%E9%93%BE%E8%A1%A8%E9%80%86%E5%BA%8F%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</url>
-    <content><![CDATA[<h2 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h2><ul>
-<li>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</li>
-<li>请你将两个数相加，并以相同形式返回一个表示和的链表。</li>
-<li>你可以假设除了数字 0 之外，这两个数都不会以 0 开头</li>
-</ul>
-<h2 id="2-解决方法"><a href="#2-解决方法" class="headerlink" title="2. 解决方法"></a>2. 解决方法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;ListNode&#125;</span> <span class="variable">l1</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;ListNode&#125;</span> <span class="variable">l2</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;ListNode&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addTwoNumbers = <span class="function"><span class="keyword">function</span> (<span class="params">l1, l2</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 虚拟头结点（构建新链表时的常用技巧）</span></span><br><span class="line">  <span class="keyword">let</span> dummy = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">  <span class="comment">// 指针 p 负责构建新链表</span></span><br><span class="line">  <span class="keyword">let</span> p = dummy;</span><br><span class="line">  <span class="comment">// 记录进位</span></span><br><span class="line">  <span class="keyword">let</span> carry = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// 开始执行加法，两条链表走完且没有进位时才能结束循环</span></span><br><span class="line">  <span class="keyword">while</span> (l1 != <span class="literal">null</span> || l2 != <span class="literal">null</span> || carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 先加上上次的进位</span></span><br><span class="line">    <span class="keyword">let</span> val = carry;</span><br><span class="line">    <span class="keyword">if</span> (l1 != <span class="literal">null</span>) &#123;</span><br><span class="line">      val += l1.val;</span><br><span class="line">      l1 = l1.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (l2 != <span class="literal">null</span>) &#123;</span><br><span class="line">      val += l2.val;</span><br><span class="line">      l2 = l2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理进位情况</span></span><br><span class="line">    carry = <span class="built_in">Math</span>.floor(val / <span class="number">10</span>);</span><br><span class="line">    val = val % <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 构建新节点</span></span><br><span class="line">    p.next = <span class="keyword">new</span> ListNode(val);</span><br><span class="line">    p = p.next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 返回结果链表的头结点（去除虚拟头结点）</span></span><br><span class="line">  <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-题源"><a href="#3-题源" class="headerlink" title="3. 题源"></a>3. 题源</h2><ul>
-<li><a href="https://leetcode-cn.com/problems/add-two-numbers/">两数相加</a></li>
 </ul>
 ]]></content>
       <categories>
