@@ -2790,6 +2790,43 @@
       </tags>
   </entry>
   <entry>
+    <title>获取getter的几种方式</title>
+    <url>/eternallycyf/%E8%8E%B7%E5%8F%96getter%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="获取getter的几种方式"><a href="#获取getter的几种方式" class="headerlink" title="获取getter的几种方式"></a>获取getter的几种方式</h2><ul>
+<li><code>__lookupGetter__</code></li>
+<li><code>Object.definedProperty</code></li>
+<li><code>Proxy</code></li>
+<li><code>Object.getOwnPropertyDescriptor(obj,&#39;a&#39;).get</code></li>
+<li>区别<ul>
+<li><code>__defineGetter__ Proxy</code> <code>Object.getOwnPropertyDescriptor(obj,&#39;a&#39;).get</code> 可以动态设置</li>
+<li><code>Object.definedProperty</code> 只能定义时候设置</li>
+</ul>
+</li>
+</ul>
+<h2 id="旧的写法"><a href="#旧的写法" class="headerlink" title="旧的写法"></a>旧的写法</h2><ul>
+<li>兼容性好,但未来版本可能会移除</li>
+<li>在 <code>Koa Vue</code> 等源码中都有用到<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">obj.__lookupGetter__(prop)</span><br><span class="line">obj.__lookupSetter__(prop)</span><br><span class="line">obj.__defineGetter__(prop,func)</span><br><span class="line">obj.__defineSetter__(prop,func)</span><br><span class="line">#</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">  obj.__defineGetter__(<span class="string">&#x27;a&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;get a&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="built_in">console</span>.log(obj.a);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Object-definedProperty"><a href="#Object-definedProperty" class="headerlink" title="Object.definedProperty"></a>Object.definedProperty</h2><ul>
+<li>这个是常见的这里就不详细说了</li>
+<li>只要注意他和其他的区别就行了: 只能定义时候设置</li>
+</ul>
+<h2 id="Object-getOwnPropertyDescriptor-obj-’a’-get"><a href="#Object-getOwnPropertyDescriptor-obj-’a’-get" class="headerlink" title="Object.getOwnPropertyDescriptor(obj,’a’).get"></a>Object.getOwnPropertyDescriptor(obj,’a’).get</h2><ul>
+<li>利用原生构造器获取,兼容性没有 <code>__lookupGetter__</code> 好</li>
+</ul>
+<h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><ul>
+<li>利用代理方式获取修改<code>getter</code></li>
+<li>同样的 兼容性没有 <code>__lookupGetter__</code> 好</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git的常用命令</title>
     <url>/eternallycyf/Git%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h1><p><code>Git</code>是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目，<code>Git</code>擅长的是程序代码的版本化管理，对程序源代码进行差异化的版本管理，代码库占极少的空间，可以说<code>Git</code>是目前世界上最先进的分布式版本控制系统。</p>
@@ -3010,6 +3047,118 @@
       </categories>
       <tags>
         <tag>browser</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用Function创建函数</title>
+    <url>/eternallycyf/%E5%88%A9%E7%94%A8Function%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><ul>
+<li>可以以字符串的形式创建函数<ul>
+<li><code>new Function(functionBody)</code></li>
+<li><code>new Function(arg1, functionBody)</code></li>
+<li><code>new Function(arg1, ... argN, functionBody)</code><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> test = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;console.log(a+b+c)&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> test = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;a,b,c&#x27;</span>, <span class="string">&#x27;console.log(a+b+c)&#x27;</span>)</span><br><span class="line">test(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="comment">// 6</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="Function的坑"><a href="#Function的坑" class="headerlink" title="Function的坑"></a>Function的坑</h2><ul>
+<li>如果在函数内部用 <code>Function</code> 定义的函数</li>
+<li>传入的变量只能是全局变量</li>
+<li>在 <code>js</code> 环境是 <code>undefined </code></li>
+<li>在 <code>node</code> 环境是 报错</li>
+<li>其次 <code>Function.__proto__</code> 会指向自己的 <code>__prototype__</code> 这是语言默认的规定 他是其他构造器的基类<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> b= <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;console.log(a+b+c)&#x27;</span>)</span><br><span class="line"><span class="comment">// eval(&#x27;!function _(c)&#123;console.log(a+b+c)&#125;(4)&#x27;) </span></span><br><span class="line"><span class="comment">// 8</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> t= test()</span><br><span class="line">t(<span class="number">4</span>) <span class="comment">// 7</span></span><br><span class="line"><span class="comment">// 不会闭包 直接使用全局的变量或自己Function内部定义的</span></span><br><span class="line"><span class="comment">// node的全局在global </span></span><br><span class="line"><span class="comment">// 用var定义的 获取不到 会直接报错</span></span><br><span class="line"><span class="comment">// 用eval定义的 可以访问内部作用域</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js数组排序</title>
+    <url>/eternallycyf/js%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="Js实现数组排序"><a href="#Js实现数组排序" class="headerlink" title="Js实现数组排序"></a>Js实现数组排序</h1><p>常用排序的<code>Js</code>实现方案，包括原型链方法调用、简单选择排序、冒泡排序、插入排序、快速排序、希尔排序、堆排序、归并排序。</p>
+<h2 id="原型链方法调用"><a href="#原型链方法调用" class="headerlink" title="原型链方法调用"></a>原型链方法调用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line">arr.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a-b); <span class="comment">// arr.__proto__.sort</span></span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">var</span> n = arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;n; ++i)&#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> k=i+<span class="number">1</span>; k&lt;n; ++k)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[k] &lt; arr[minIndex]) minIndex = k;</span><br><span class="line">    &#125;</span><br><span class="line">    [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(n²) 最好情况 O(n²) 最坏情况 O(n²) 空间复杂度 O(1) 不稳定排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">var</span> n = arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;n; ++i)&#123;</span><br><span class="line">    <span class="keyword">let</span> swapFlag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">0</span>; k&lt;n-i-<span class="number">1</span>; ++k)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[k] &gt; arr[k+<span class="number">1</span>]) &#123;</span><br><span class="line">            swapFlag = <span class="literal">true</span>;</span><br><span class="line">            [arr[k], arr[k+<span class="number">1</span>]] = [arr[k+<span class="number">1</span>], arr[k]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!swapFlag) <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(n²) 最好情况 O(n) 最坏情况 O(n²) 空间复杂度 O(1) 稳定排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">var</span> n = arr.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>; i&lt;n; ++i)&#123;</span><br><span class="line">    <span class="keyword">let</span> preIndex = i-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> current = arr[i];</span><br><span class="line">    <span class="keyword">while</span>(preIndex &gt;= <span class="number">0</span> &amp;&amp; arr[preIndex] &gt; current) &#123;</span><br><span class="line">        arr[preIndex+<span class="number">1</span>] = arr[preIndex];</span><br><span class="line">        --preIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[preIndex+<span class="number">1</span>] = current;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(n²) 最好情况 O(n) 最坏情况 O(n²) 空间复杂度 O(1) 稳定排序</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">partition</span>(<span class="params">arr, start, end</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> boundary = arr[start];</span><br><span class="line">    <span class="keyword">while</span>(start &lt; end)&#123;</span><br><span class="line">        <span class="keyword">while</span>(start &lt; end &amp;&amp; arr[end] &gt;= boundary) --end;</span><br><span class="line">        arr[start] = arr[end];</span><br><span class="line">        <span class="keyword">while</span>(start &lt; end &amp;&amp; arr[start] &lt;= boundary) ++start;</span><br><span class="line">        arr[end] = arr[start];</span><br><span class="line">    &#125;</span><br><span class="line">    arr[start] = boundary;</span><br><span class="line">    <span class="keyword">return</span> start;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr, start, end</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(start &gt;= end) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">var</span> boundaryIndex = partition(arr, start, end);</span><br><span class="line">    quickSort(arr, start, boundaryIndex-<span class="number">1</span>);</span><br><span class="line">    quickSort(arr, boundaryIndex+<span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line">quickSort(arr, <span class="number">0</span>, arr.length-<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(nlogn) 最好情况 O(nlogn) 最坏情况 O(n²) 空间复杂度 O(logn) 不稳定排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shellSort</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> gap=n/<span class="number">2</span>; gap&gt;<span class="number">0</span>; gap=<span class="built_in">Math</span>.floor(gap/<span class="number">2</span>))&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=gap; i&lt;n; ++i)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> k=i-gap; k&gt;=<span class="number">0</span> &amp;&amp; arr[k]&gt;arr[k+gap]; k=k-gap)&#123;</span><br><span class="line">                [arr[k], arr[k+gap]] = [arr[k+gap], arr[k]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line">shellSort(arr);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(nlogn) 最好情况 O(nlog²n) 最坏情况 O(nlog²n) 空间复杂度 O(1) 不稳定排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">adjustHeap</span>(<span class="params">arr, i, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> k=<span class="number">2</span>*i+<span class="number">1</span>; k&lt;n; k=<span class="number">2</span>*k+<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> parent = arr[i];</span><br><span class="line">        <span class="keyword">if</span>(k+<span class="number">1</span> &lt; n &amp;&amp; arr[k] &lt; arr[k+<span class="number">1</span>]) ++k;</span><br><span class="line">        <span class="keyword">if</span>(parent &lt; arr[k])&#123;</span><br><span class="line">            [arr[i], arr[k]] = [arr[k], arr[i]];</span><br><span class="line">            i = k;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">heapSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="built_in">Math</span>.floor(n/<span class="number">2</span>-<span class="number">1</span>); i&gt;=<span class="number">0</span>; --i) adjustHeap(arr, i, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=n-<span class="number">1</span>; i&gt;<span class="number">0</span>; --i)&#123;</span><br><span class="line">        [arr[<span class="number">0</span>], arr[i]] = [arr[i], arr[<span class="number">0</span>]];</span><br><span class="line">        adjustHeap(arr, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line">heapSort(arr);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(nlogn) 最好情况 O(nlogn) 最坏情况 O(nlogn) 空间复杂度 O(1) 不稳定排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merger</span>(<span class="params">arr, start, mid, end, auxArr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> startStroage = start;</span><br><span class="line">    <span class="keyword">var</span> midRight = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(start &lt;= mid &amp;&amp; midRight &lt;= end)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[start] &lt;= arr[midRight]) auxArr[count++] = arr[start++];</span><br><span class="line">        <span class="keyword">else</span> auxArr[count++] = arr[midRight++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(start&lt;=mid) auxArr[count++] = arr[start++];</span><br><span class="line">    <span class="keyword">while</span>(midRight&lt;=end) auxArr[count++] = arr[midRight++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;count; ++i) arr[i+startStroage] = auxArr[i];</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr, start, end, auxArr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(start&lt;end) &#123;</span><br><span class="line">    <span class="keyword">var</span> mid = <span class="built_in">Math</span>.floor((start+end)/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">var</span> left = mergeSort(arr, start, mid, auxArr); </span><br><span class="line">    <span class="keyword">var</span> right = mergeSort(arr, mid+<span class="number">1</span>, end, auxArr); </span><br><span class="line">    arr = merger(arr, start, mid, end, auxArr);  </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line">arr = mergeSort(arr, <span class="number">0</span>, arr.length-<span class="number">1</span>, []);</span><br><span class="line"><span class="built_in">console</span>.log(arr); <span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"><span class="comment">// 平均时间复杂度 O(nlogn) 最好情况 O(nlogn) 最坏情况 O(nlogn) 空间复杂度 O(n) 稳定排序</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://blog.touchczy.top/#/JavaScript/Js%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F">https://blog.touchczy.top/#/JavaScript/Js%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js的GC机制</title>
+    <url>/eternallycyf/js%E7%9A%84GC%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="Js的GC机制"><a href="#Js的GC机制" class="headerlink" title="Js的GC机制"></a>Js的GC机制</h1><p>在<code>Js</code>七种基本类型中的引用类型<code>Object</code>的变量其占据内存空间大且大小不固定，在堆内存中实际存储对象，在栈内存中存储对象的指针，对于对象的访问是按引用访问的。在栈区中执行的变量等是通过值访问，当其作用域销毁后变量也就随之销毁，而使用引用访问的堆区变量，在一个作用域消失后还可能在外层作用域或者其他作用域仍然存在引用，不能直接销毁，此时就需要通过算法计算该堆区变量是否属于不再需要的变量，从而决定是否需要进行内存回收，在<code>Js</code>中主要有引用计数与标记清除两种垃圾回收算法。</p>
+<h2 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h2><p>对于引用计数垃圾回收算法，把对象是否不再需要简化定义为该对象有没有其他变量或对象引用到它，如果没有引用指向该对象，该对象将被垃圾回收机制回收。在这里，对象的概念不仅特指<code>JavaScript</code>对象，还包括函数作用域或者全局词法作用域。引用计数垃圾回收算法使用比较少，主要是在<code>IE6</code>与<code>IE7</code>等低版本<code>IE</code>浏览器中使用。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span> : &#123;</span><br><span class="line">        <span class="attr">b</span>: <span class="number">11</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 此时两个对象被创建，一个作为另一个的a属性被引用称为对象1，另一个被obj变量引用称为对象2</span></span><br><span class="line"><span class="comment">// 此时两个对象都有被引用的变量，都不能回收内存</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = obj;</span><br><span class="line"><span class="comment">// 此时对于obj所引用的对象2，已经有obj与Obj2两个变量的引用</span></span><br><span class="line"></span><br><span class="line">obj = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 将obj对于对象2的引用解除，此时对象2还存在obj2一个引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a2 = obj2.a;</span><br><span class="line"><span class="comment">// 引用对象1，此时对象1有a与a2两个引用</span></span><br><span class="line"></span><br><span class="line">obj2 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 解除对象2的一个引用，此时对象2的引用数量为0，可以被垃圾回收</span></span><br><span class="line"><span class="comment">// 对象2的a属性引用被解除，此时对象1只有a2一个引用</span></span><br><span class="line"></span><br><span class="line">a2 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 解除a2对于对象1的引用，此时对象1可以被垃圾回收</span></span><br></pre></td></tr></table></figure>
+
+<p>但是对于引用计数垃圾回收算法有个限制，当对象循环引用时，就会造成内存泄漏，也就是引用计数垃圾回收算法无法处理循环引用的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;; <span class="comment">// 命名为对象1，此时引用数量为1</span></span><br><span class="line">    <span class="keyword">var</span> obj2 = &#123;&#125;; <span class="comment">// 命名为对象2，此时引用数量为1</span></span><br><span class="line">    obj.a = obj2; <span class="comment">// obj的a属性引用obj2，此时对象2的引用数量为2</span></span><br><span class="line">    obj2.a = obj; <span class="comment">// obj2的a属性引用obj，此时对象1的引用数量为2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 此时执行栈的obj变量与obj2变量被销毁，对象1与对象2的引用数量减1</span></span><br><span class="line">    <span class="comment">// 对象1的引用数量为1，对象2的引用数量为1，两个对象都不会被引用计数算法垃圾回收</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funct();</span><br><span class="line"><span class="comment">// 两个对象被创建，并互相引用，形成了一个循环，它们被调用之后会离开函数作用域，所以它们已经不再需要了，可以被回收了，然而引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h2><p>对于引用计数垃圾回收算法，把对象是否不再需要简化定义为该对象是否可以获得，该算法设置一个叫做根<code>root</code>的对象，在<code>Javascript</code>里根是全局对象，垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象，以此不断向下查找。从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象，这样便解决了循环引用的问题。所有现代浏览器都使用了标记清除垃圾回收算法，所有对<code>JavaScript</code>垃圾回收算法的改进都是基于标记清除算法的改进。</p>
+<ul>
+<li>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。</li>
+<li>然后，它会去掉运行环境中的变量以及被环境中变量所引用的变量的标记。</li>
+<li>此后，依然有标记的变量就被视为准备删除的变量，原因是在运行环境中已经无法访问到这些变量了。</li>
+<li>最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://blog.touchczy.top/#/JavaScript/Js%E7%9A%84GC%E6%9C%BA%E5%88%B6">https://blog.touchczy.top/#/JavaScript/Js%E7%9A%84GC%E6%9C%BA%E5%88%B6</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js中的几种全局对象</title>
+    <url>/eternallycyf/js%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<h2 id="js中的几种全局对象"><a href="#js中的几种全局对象" class="headerlink" title="js中的几种全局对象"></a>js中的几种全局对象</h2><ul>
+<li>在 <code>web</code> 环境下定义的变量 默认在 <code>window</code> 下<ul>
+<li>严格模式内部作用域定义的 不在 <code>window</code> 下</li>
+</ul>
+</li>
+<li>在<code>node</code>环境中 用<code>var</code>定义的不是全局对象下的变量<ul>
+<li>不能直接在其他作用域访问。他的全局对象是 <code>global</code></li>
+<li>而且并不会隐式的将他放在全局对象下</li>
+</ul>
+</li>
+<li>因此最新的 <code>ECMA</code> 提案规定了通用的全局对象 <code>globalThis</code><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">web: <span class="built_in">window</span> self frames <span class="built_in">this</span></span><br><span class="line"><span class="attr">node</span>: <span class="built_in">global</span>  </span><br><span class="line"><span class="attr">worker</span>: self</span><br><span class="line">通用: globalThis</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/globalThis">globalThis-mdn</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -3475,6 +3624,55 @@
       </tags>
   </entry>
   <entry>
+    <title>原型与原型链</title>
+    <url>/eternallycyf/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
+    <content><![CDATA[<h2 id="创建一个构造函数"><a href="#创建一个构造函数" class="headerlink" title="创建一个构造函数"></a>创建一个构造函数</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> test = <span class="keyword">new</span> Test();</span><br></pre></td></tr></table></figure>
+
+<h2 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h2><ul>
+<li>原型与原型链指向关系<ul>
+<li>可以很清晰的看到 实例对象<code>test</code>的<code>__proto__</code>直接指向 构造函数 <code>Test.prototype</code></li>
+<li>同时 构造函数 <code>Test.prototype.__proto__</code> 指向 <code>Object.prototype</code></li>
+<li>而 <code>Object.prototype.__proto__</code> 最终指向 null</li>
+<li>最终呈现了一个链状的结构</li>
+</ul>
+</li>
+<li>构造函数与<code>Function Object</code> 内置对象的关系<ul>
+<li><code>Function</code> 和 <code>Object</code> 既是函数又是对象</li>
+<li>由于<code>Function.__proto__ === Function.prototype</code>,这是一个内置的规则</li>
+<li>所以 <code>Object</code>的 <code>__proto__</code> 指向了他的构造函数 即是 <code>Function.prototype</code></li>
+<li><code>Function</code> 是所有构造函数的基类</li>
+</ul>
+</li>
+<li><code>constructor</code><ul>
+<li>每个<code>prototype</code> 下都有一个 <code>constructor</code></li>
+<li>而实例对象的 <code>constructor</code> 直接指向构造函数对象<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">test.__proto__ === Test.prototype  <span class="comment">// true</span></span><br><span class="line">Test.prototype.__proto__ === <span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ <span class="comment">// null</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.c = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test)</span><br><span class="line">Test.__proto__ === <span class="built_in">Function</span>.prototype <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__=== <span class="built_in">Function</span>.prototype<span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype<span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.__proto__<span class="comment">//true</span></span><br><span class="line">test.constructor === Test <span class="comment">// true</span></span><br><span class="line">#</span><br><span class="line">test &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">__proto__</span>: Test.prototype = &#123;</span><br><span class="line">    <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">__proto__</span>: <span class="built_in">Object</span>.prototype = &#123;</span><br><span class="line">      <span class="attr">c</span>: <span class="number">3</span>,</span><br><span class="line">      <span class="attr">__proto__</span>:<span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><ul>
+<li>用于实例化构造函数</li>
+<li>一旦<code>new</code>了就是基本包装类型</li>
+<li>除了 <code>new Object</code> 指向引用是全等的</li>
+<li>其他都是不全等的,两个等号会自动转换<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> newObj = <span class="keyword">new</span> <span class="built_in">Object</span>(obj)</span><br><span class="line"><span class="comment">// true 引用 object.prototype</span></span><br><span class="line"><span class="built_in">console</span>.log(newObj === obj) </span><br><span class="line">#</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> newArr = <span class="keyword">new</span> <span class="built_in">Array</span>(arr)</span><br><span class="line"><span class="comment">// let newArr = new Array(arr,3,4,5)</span></span><br><span class="line"><span class="built_in">console</span>.los(arr === newArr) <span class="comment">//false</span></span><br><span class="line"># </span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> newA = <span class="keyword">new</span> <span class="built_in">Number</span>(a)</span><br><span class="line"><span class="built_in">console</span>.log(a===newA) <span class="comment">//false 原始类型和包装类型不相等</span></span><br><span class="line"><span class="built_in">console</span>.log(a==newA) <span class="comment">// true 非严格基本包装类型自动转换</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="手写new"><a href="#手写new" class="headerlink" title="手写new"></a>手写new</h2><ul>
+<li><code>new</code> 做了什么<ul>
+<li>在内存中开辟一个新的空间,存储创建的新的对象</li>
+<li>把<code>this</code>设置为当前的对象</li>
+<li>设置对象的属性和方法的值</li>
+<li>把<code>this</code>这个对象返回<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title">constructor</span> = [].<span class="title">shift</span>.<span class="title">call</span>(<span class="params"><span class="built_in">arguments</span></span>)</span><br><span class="line">  <span class="title">var</span> <span class="title">_this</span> = &#123;&#125;;</span><br><span class="line">  _this.__proto__ = <span class="title">constructor</span>.<span class="title">prototype</span>;</span><br><span class="line">  <span class="keyword">var</span> res = <span class="title">constructor</span>.<span class="title">apply</span>(<span class="params">_this, <span class="built_in">arguments</span></span>)</span><br><span class="line">  <span class="title">return</span> <span class="title">typeof</span> <span class="title">res</span> === &#x27;<span class="title">object</span>&#x27; ? <span class="title">res</span> : <span class="title">_this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title">function</span> <span class="title">Test</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="built_in">this</span>.a = a;</span><br><span class="line">  <span class="built_in">this</span>.b = b;</span><br><span class="line">  <span class="comment">// return &#123;</span></span><br><span class="line">  <span class="comment">//   c: 3,</span></span><br><span class="line">  <span class="comment">//   d: 4</span></span><br><span class="line">  <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br><span class="line">Test.prototype.add = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.a + <span class="built_in">this</span>.b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> test = myNew(Test, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment">// console.log(Test(1, 2));</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>拿硬币</title>
     <url>/eternallycyf/%E6%8B%BF%E7%A1%AC%E5%B8%81/</url>
     <content><![CDATA[<h2 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h2><ul>
@@ -3505,6 +3703,73 @@
       </categories>
       <tags>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>匿名函数与自执行函数</title>
+    <url>/eternallycyf/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E4%B8%8E%E8%87%AA%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><ul>
+<li>匿名函数就是指的没有名字的函数</li>
+<li>在创建中将函数赋值给一个变量<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 我们通常创建函数有两个方式。利用Function创建这里不谈</span></span><br><span class="line"><span class="comment">//   普通函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">//   命名函数 =&gt; 函数表达式</span></span><br><span class="line"><span class="keyword">const</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="自执行函数"><a href="#自执行函数" class="headerlink" title="自执行函数"></a>自执行函数</h2><ul>
+<li>自执行即函数创建完成即调用<ul>
+<li>必备条件是一个表达式</li>
+<li>命名函数也就是一个表达式</li>
+</ul>
+</li>
+<li>理论上函数后面加一个<code>()</code>函数就会执行</li>
+<li>但是由于浏览器引擎的规定 必须是一个表达式才会执行 否则就会报错<ul>
+<li>常见的这些符号都是表达式</li>
+<li>= + - * / &amp;&amp; || true false () ~ new <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">+<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123; &#125;()</span><br><span class="line"><span class="comment">// 函数表达式直接就能跟() 因为他就是表达式</span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;--&#x27;</span>);</span><br><span class="line">  &#125;();</span><br><span class="line"><span class="comment">// w3c推荐</span></span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;-&#x27;</span>);</span><br><span class="line">  &#125;())</span><br><span class="line"><span class="comment">// 常用</span></span><br><span class="line">  ;(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;--&#x27;</span>);</span><br><span class="line">  &#125;)()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="es3利用自执行函数构建的模块"><a href="#es3利用自执行函数构建的模块" class="headerlink" title="es3利用自执行函数构建的模块"></a>es3利用自执行函数构建的模块</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> utilModules = (<span class="function">(<span class="params"><span class="built_in">Function</span></span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">Utils</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="built_in">this</span>.name = name;</span><br><span class="line">     <span class="built_in">this</span>.age = age;</span><br><span class="line">   &#125;</span><br><span class="line">   Utils.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">window</span>.Utils = Utils</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">     Utils</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;)(<span class="built_in">Function</span>);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>稀疏数组与密集数组</title>
+    <url>/eternallycyf/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%E4%B8%8E%E5%AF%86%E9%9B%86%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h2><ul>
+<li>数组的元素之间可以有空隙，因为一个数组其实就是一个键值映射</li>
+<li><code>es5</code><ul>
+<li><code>forEach(), filter(), reduce(), every() 和some()</code>都会跳过空位。</li>
+<li><code>map()</code>会跳过空位，但会保留这个值</li>
+<li><code>join()</code>和<code>toString()</code> 会将空位视为 <code>undefined</code>，而 <code>undefined</code>和 <code>null</code> 会被处理成空字符串。</li>
+</ul>
+</li>
+<li><code>es6</code><ul>
+<li><code>rray.from</code> 将数组的空位转为 <code>undefined</code></li>
+<li>… 将空位转换为 <code>undefined</code></li>
+<li><code>copyWithin</code> 将空位一起拷贝</li>
+<li><code> fill()</code> 将空位视为正常的数组位置</li>
+<li><code>for…of</code> 循环会遍历空位</li>
+<li><code>entries()、keys()、values()、find()</code>和<code>findIndex()</code> 将空位处理成 <code>undefined</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, , , <span class="number">2</span>, , <span class="number">3</span>, , <span class="number">4</span>, , <span class="number">5</span>, , <span class="number">6</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr[<span class="number">1</span>]) <span class="comment">// undefined</span></span><br><span class="line">arr.find(<span class="function"><span class="params">item</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(item) &#125;)</span><br><span class="line"><span class="comment">// 1 undefined undefined 2 undefined ...</span></span><br><span class="line">arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(item) &#125;)</span><br><span class="line"><span class="comment">// 1 2 3 4 5 6</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="密集数组"><a href="#密集数组" class="headerlink" title="密集数组"></a>密集数组</h2><ul>
+<li><code>Array.apply(null,Array(3));</code><ul>
+<li><code>Array</code> 构造函数 当只有一个参数且为数字类型时 数组没有包含实际的元素</li>
+<li><code>apply</code> 将空值 转换成了数组</li>
+</ul>
+</li>
+<li>密集数组可以遍历并赋值</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
