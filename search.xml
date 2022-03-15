@@ -4265,6 +4265,30 @@
       </tags>
   </entry>
   <entry>
+    <title>手写Object.preventExtensions</title>
+    <url>/eternallycyf/%E6%89%8B%E5%86%99Object.preventExtensions/</url>
+    <content><![CDATA[<h2 id="Object-preventExtensions"><a href="#Object-preventExtensions" class="headerlink" title="Object.preventExtensions"></a>Object.preventExtensions</h2><ul>
+<li>浅操作</li>
+<li>让一个对象不可拓展</li>
+<li>可删除 可修改 不可拓展</li>
+<li>返回不可拓展的对象<ul>
+<li>仅阻止添加自身的属性 </li>
+<li>原型链属性还可以添加 但不能解除引用关系</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="built_in">Object</span>.preventExtensions(obj)</span><br><span class="line">#</span><br><span class="line">freeze 不可修改 不可删除 不可拓展</span><br><span class="line">seal 可修改 不可删除 不可拓展</span><br><span class="line">preventExtensions 可修改 可删除 不可拓展</span><br><span class="line"># 空对象都是<span class="literal">false</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(obj)</span><br><span class="line"><span class="built_in">Object</span>.isFrozen(Obj) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(obj) <span class="comment">// ture</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="手写"><a href="#手写" class="headerlink" title="手写"></a>手写</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: &#123;</span><br><span class="line">      <span class="attr">c</span>: &#123;</span><br><span class="line">        <span class="attr">d</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">Object</span>.deepPreventExtensions = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _keys = <span class="built_in">Object</span>.getOwnPropertyNames(o)</span><br><span class="line">    <span class="keyword">if</span> (_keys.length) &#123;</span><br><span class="line">      _keys.forEach(<span class="function">(<span class="params">k</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> _v = o[k];</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> _v === <span class="string">&#x27;object&#x27;</span> &amp;&amp; _v !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="built_in">Object</span>.deepPreventExtensions(_v)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.preventExtensions(o)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Object</span>.deepPreventExtensions(obj)</span><br><span class="line">  obj.b.c.e = <span class="number">5</span></span><br><span class="line">  <span class="built_in">console</span>.log(obj);  <span class="comment">// 不存在e</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>sourceCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>手写Symbol.iterator</title>
     <url>/eternallycyf/%E6%89%8B%E5%86%99Symbol.iterator/</url>
     <content><![CDATA[<h2 id="Symbol-iterator"><a href="#Symbol-iterator" class="headerlink" title="Symbol.iterator"></a>Symbol.iterator</h2><ul>
@@ -4615,6 +4639,8 @@
 <h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> a)&#123;</span><br><span class="line">      b[key]=a[key];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  extend(obj1,obj2);</span><br></pre></td></tr></table></figure>
 
 <h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(target ,current)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.create(</span><br><span class="line">  <span class="built_in">Object</span>.getPrototypeOf(obj),</span><br><span class="line">  <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <h3 id="展开运算符-…"><a href="#展开运算符-…" class="headerlink" title="展开运算符 …"></a>展开运算符 …</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">name</span>:<span class="string">&#x27;zs&#x27;</span>, <span class="attr">age</span>:<span class="number">12</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> newObj = &#123; ...obj &#125;</span><br></pre></td></tr></table></figure>
 
