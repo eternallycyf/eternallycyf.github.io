@@ -4686,6 +4686,32 @@
       </tags>
   </entry>
   <entry>
+    <title>数组去重</title>
+    <url>/eternallycyf/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/</url>
+    <content><![CDATA[<h2 id="1-解决方法"><a href="#1-解决方法" class="headerlink" title="1. 解决方法"></a>1. 解决方法</h2><h3 id="1-1-通过-Set"><a href="#1-1-通过-Set" class="headerlink" title="1.1 通过 Set"></a>1.1 通过 Set</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一般工作中我都直接采用 set 进行集合运算 比较方便和容易理解</span></span><br><span class="line"><span class="keyword">const</span> scores = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="keyword">let</span> expectNumber = [...new <span class="built_in">Set</span>([...scores])].length <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-通过-filter"><a href="#1-2-通过-filter" class="headerlink" title="1.2 通过 filter"></a>1.2 通过 filter</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> scores = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="comment">// 通过indexOf 让filter过滤掉多余的值</span></span><br><span class="line"><span class="keyword">let</span> expectNumber =scores.filter(<span class="function">(<span class="params">ele, index, arr</span>) =&gt;</span> arr.indexOf(ele)== index).length; <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-题源"><a href="#2-题源" class="headerlink" title="2. 题源:"></a>2. 题源:</h2><ul>
+<li><a href="https://leetcode-cn.com/problems/qi-wang-ge-shu-tong-ji/">LCP 11.期望个数统一</a></li>
+<li>看了半天没看懂题目是什么意思 。。于是回顾了下 数学期望值</li>
+<li>数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和</li>
+<li>举个例子 一个骰子 他能摇出来的所有结果的总和 就是他的期望值<ul>
+<li>即只可能是 <code>[1,2,3,4,5,6]</code></li>
+<li>不可能为<code>[2.5,...]</code></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>原型与原型链</title>
     <url>/eternallycyf/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
     <content><![CDATA[<h2 id="创建一个构造函数"><a href="#创建一个构造函数" class="headerlink" title="创建一个构造函数"></a>创建一个构造函数</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> test = <span class="keyword">new</span> Test();</span><br></pre></td></tr></table></figure>
@@ -4731,32 +4757,6 @@
         <category>leetcode</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组去重</title>
-    <url>/eternallycyf/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/</url>
-    <content><![CDATA[<h2 id="1-解决方法"><a href="#1-解决方法" class="headerlink" title="1. 解决方法"></a>1. 解决方法</h2><h3 id="1-1-通过-Set"><a href="#1-1-通过-Set" class="headerlink" title="1.1 通过 Set"></a>1.1 通过 Set</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一般工作中我都直接采用 set 进行集合运算 比较方便和容易理解</span></span><br><span class="line"><span class="keyword">const</span> scores = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="keyword">let</span> expectNumber = [...new <span class="built_in">Set</span>([...scores])].length <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-通过-filter"><a href="#1-2-通过-filter" class="headerlink" title="1.2 通过 filter"></a>1.2 通过 filter</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> scores = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"><span class="comment">// 通过indexOf 让filter过滤掉多余的值</span></span><br><span class="line"><span class="keyword">let</span> expectNumber =scores.filter(<span class="function">(<span class="params">ele, index, arr</span>) =&gt;</span> arr.indexOf(ele)== index).length; <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-题源"><a href="#2-题源" class="headerlink" title="2. 题源:"></a>2. 题源:</h2><ul>
-<li><a href="https://leetcode-cn.com/problems/qi-wang-ge-shu-tong-ji/">LCP 11.期望个数统一</a></li>
-<li>看了半天没看懂题目是什么意思 。。于是回顾了下 数学期望值</li>
-<li>数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和</li>
-<li>举个例子 一个骰子 他能摇出来的所有结果的总和 就是他的期望值<ul>
-<li>即只可能是 <code>[1,2,3,4,5,6]</code></li>
-<li>不可能为<code>[2.5,...]</code></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
         <tag>JavaScript</tag>
       </tags>
   </entry>
