@@ -1,6 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>贪婪模式</title>
+    <url>/eternallycyf/%E8%B4%AA%E5%A9%AA%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式"></a>贪婪模式</h2><ul>
+<li><code>?</code>: 当该字符紧跟在任何一个其他限制符<code>(*, +, ?, &#123;n&#125;, &#123;n,&#125;, &#123;n,m&#125;)</code>后面时</li>
+<li>匹配模式是非贪婪的，非贪婪模式尽可能少的匹配所搜索的字符串</li>
+<li>而默认的贪婪模式则尽可能多的匹配所搜索的字符串，例如对于字符串<code>oooo，o+?</code>将匹配单个<code>o</code>，而<code>o+</code>将匹配所有<code>o</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 默认是匹配最大可能</span></span><br><span class="line"><span class="keyword">var</span> str=<span class="string">&#x27;abcd&#123;&#123;efg&#125;&#125;abcd&#123;&#123;xyc&#125;&#125;&#x27;</span></span><br><span class="line">reg = <span class="regexp">/&#123;&#123;.*&#125;&#125;/g</span> <span class="comment">// &#123;&#123;efg&#125;&#125;abcd&#123;&#123;xyz&#125;&#125;</span></span><br><span class="line"># 非贪婪模式 *? ?? +? </span><br><span class="line">reg = <span class="regexp">/&#123;&#123;.*?&#125;&#125;/g</span> <span class="comment">// &#123;&#123;efg&#125;&#125; &#123;&#123;xyz&#125;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>正向预查</title>
+    <url>/eternallycyf/%E6%AD%A3%E5%90%91%E9%A2%84%E6%9F%A5/</url>
+    <content><![CDATA[<h2 id="正向预查"><a href="#正向预查" class="headerlink" title="正向预查"></a>正向预查</h2><h3 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h3><ul>
+<li>匹配<code>pattern</code>但不获取匹配结果，也就是说这是一个非获取匹配</li>
+<li>不进行存储供以后使用，这在使用字符<code>|</code>来组合一个模式的各个部分是很有用<br>例如<code>industr(?:y|ies)</code>就是一个比<code>industry|industries</code>更简略的表达式。</li>
+</ul>
+<h3 id="pattern-1"><a href="#pattern-1" class="headerlink" title="(?=pattern)"></a>(?=pattern)</h3><ul>
+<li>正向肯定预查 <code>look ahead positive assert</code></li>
+<li>在任何匹配<code>pattern</code>的字符串开始处匹配查找字符串</li>
+<li>这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ?=n 匹配任何其后紧接着指定字符串n的字符串</span></span><br><span class="line"><span class="string">&#x27;abcdaccd&#x27;</span>  a后面跟的是b的</span><br><span class="line"><span class="string">&#x27;a(?=b)/g&#x27;</span>  <span class="comment">// a  </span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="pattern-2"><a href="#pattern-2" class="headerlink" title="(?!pattern)"></a>(?!pattern)</h3><ul>
+<li>正向否定预查 <code>negative assert</code></li>
+<li>在任何不匹配<code>pattern</code>的字符串开始处匹配查找字符串，这是一个非获取匹配</li>
+<li>也就是说，该匹配不需要获取供以后使用<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">?!n 匹配任何其后紧接着指定字符串不是n的字符串</span><br><span class="line"><span class="string">&#x27;abcdaccda&#x27;</span>  a后面跟的不是b的</span><br><span class="line"><span class="string">&#x27;a(?!b)/g&#x27;</span>  <span class="comment">// a  a </span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="lt-pattern"><a href="#lt-pattern" class="headerlink" title="(?&lt;=pattern)"></a>(?&lt;=pattern)</h3><ul>
+<li>反向肯定预查 <code>look behind</code></li>
+<li>与正向肯定预查类似，只是方向相反</li>
+</ul>
+<h3 id="lt-pattern-1"><a href="#lt-pattern-1" class="headerlink" title="(?&lt;!pattern)"></a>(?&lt;!pattern)</h3><ul>
+<li>反向否定预查</li>
+<li>与正向否定预查类似 只是方向相反</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>反向引用</title>
+    <url>/eternallycyf/%E5%8F%8D%E5%90%91%E5%BC%95%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h2><ul>
+<li>子表达式<ul>
+<li>我们将用括号括起来的部分称之为一个子表达式</li>
+<li>在进行子表达式匹配时的原则是：由外向内，由左向右</li>
+</ul>
+</li>
+<li>反向引用<ul>
+<li><code>\n</code> 表示引用第一次匹配到的子表达式 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># 子表达式</span><br><span class="line">(a)</span><br><span class="line"># aaaa 格式 反向引用第几个表达式 \<span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;bbbbaaaaccaaaaaddddaaa&#x27;</span></span><br><span class="line">reg= <span class="regexp">/(a)\1\1\1/g</span>; <span class="comment">// &#x27;aaaa&#x27;, &#x27;aaaa&#x27;</span></span><br><span class="line">reg= <span class="regexp">/(\w)\1\1\1/g</span>; </span><br><span class="line"><span class="comment">// &#x27;bbbb&#x27;, &#x27;aaaa&#x27;, &#x27;aaaa&#x27;, &#x27;dddd&#x27;</span></span><br><span class="line"># aabb</span><br><span class="line">reg = <span class="regexp">/(\w)\1(\w)\2/g</span></span><br><span class="line"><span class="comment">// [&#x27;bbbb&#x27;, &#x27;aaaa&#x27;, &#x27;ccaa&#x27;, &#x27;aadd&#x27;, &#x27;ddaa&#x27;]</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>手写一个webpack-plugin</title>
     <url>/eternallycyf/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAwebpack-plugin/</url>
     <content><![CDATA[<h2 id="start"><a href="#start" class="headerlink" title="start"></a>start</h2><ul>
