@@ -4180,6 +4180,39 @@
       </tags>
   </entry>
   <entry>
+    <title>惰性函数</title>
+    <url>/eternallycyf/%E6%83%B0%E6%80%A7%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="惰性函数"><a href="#惰性函数" class="headerlink" title="惰性函数"></a>惰性函数</h2><ul>
+<li><p>惰性函数，是针对优化频繁使用的函数。常用于函数库的编写、单例模式之中</p>
+</li>
+<li><p>惰性加载表示函数执行的分支只会在函数第一次调用的时候执行。在第一次调用的过程中。该函数被覆盖为另一个按照合适的方式执行的函数。这样任何对原函数的调用就不用再经过执行的分支了</p>
+</li>
+<li><p>写一个函数 让每次都返回首次调用的时间</p>
+<ul>
+<li>缺点<ul>
+<li>污染全局变量</li>
+<li>多余的 <code>if</code> 判断<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getTimeStamp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 直接为外界的变量赋值</span></span><br><span class="line">   timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   <span class="keyword">return</span> timeStamp;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>自执行函数 避免污染全局变量</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">      <span class="keyword">return</span> timeStamp;</span><br><span class="line">    &#125;</span><br><span class="line">    timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">return</span> timeStamp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
+<li><p>第一次只是在给函数重新定义 第二次执行时候才生效</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> getTimeStamp()</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="element-ui的应用"><a href="#element-ui的应用" class="headerlink" title="element ui的应用"></a>element ui的应用</h2><ul>
+<li>处理 dom 事件<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> on = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isServer &amp;&amp; <span class="built_in">document</span>.addEventListener) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.addEventListener(event, handler, <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.attachEvent(<span class="string">&#x27;on&#x27;</span> + event, handler);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="switch的应用"><a href="#switch的应用" class="headerlink" title="switch的应用"></a>switch的应用</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (num) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">2</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">3</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="literal">null</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> test()</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">3</span>)); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>获取getter的几种方式</title>
     <url>/eternallycyf/%E8%8E%B7%E5%8F%96getter%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="获取getter的几种方式"><a href="#获取getter的几种方式" class="headerlink" title="获取getter的几种方式"></a>获取getter的几种方式</h2><ul>
@@ -4209,39 +4242,6 @@
 <li>同样的 兼容性没有 <code>__lookupGetter__</code> 好</li>
 </ul>
 ]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>惰性函数</title>
-    <url>/eternallycyf/%E6%83%B0%E6%80%A7%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="惰性函数"><a href="#惰性函数" class="headerlink" title="惰性函数"></a>惰性函数</h2><ul>
-<li><p>惰性函数，是针对优化频繁使用的函数。常用于函数库的编写、单例模式之中</p>
-</li>
-<li><p>惰性加载表示函数执行的分支只会在函数第一次调用的时候执行。在第一次调用的过程中。该函数被覆盖为另一个按照合适的方式执行的函数。这样任何对原函数的调用就不用再经过执行的分支了</p>
-</li>
-<li><p>写一个函数 让每次都返回首次调用的时间</p>
-<ul>
-<li>缺点<ul>
-<li>污染全局变量</li>
-<li>多余的 <code>if</code> 判断<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getTimeStamp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 直接为外界的变量赋值</span></span><br><span class="line">   timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   <span class="keyword">return</span> timeStamp;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>自执行函数 避免污染全局变量</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">      <span class="keyword">return</span> timeStamp;</span><br><span class="line">    &#125;</span><br><span class="line">    timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">return</span> timeStamp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
-<li><p>第一次只是在给函数重新定义 第二次执行时候才生效</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> getTimeStamp()</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="element-ui的应用"><a href="#element-ui的应用" class="headerlink" title="element ui的应用"></a>element ui的应用</h2><ul>
-<li>处理 dom 事件<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> on = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isServer &amp;&amp; <span class="built_in">document</span>.addEventListener) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.addEventListener(event, handler, <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.attachEvent(<span class="string">&#x27;on&#x27;</span> + event, handler);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="switch的应用"><a href="#switch的应用" class="headerlink" title="switch的应用"></a>switch的应用</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (num) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">2</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">3</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="literal">null</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> test()</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">3</span>)); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
@@ -4493,6 +4493,34 @@
       </tags>
   </entry>
   <entry>
+    <title>js的GC机制</title>
+    <url>/eternallycyf/js%E7%9A%84GC%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="Js的GC机制"><a href="#Js的GC机制" class="headerlink" title="Js的GC机制"></a>Js的GC机制</h1><p>在<code>Js</code>七种基本类型中的引用类型<code>Object</code>的变量其占据内存空间大且大小不固定，在堆内存中实际存储对象，在栈内存中存储对象的指针，对于对象的访问是按引用访问的。在栈区中执行的变量等是通过值访问，当其作用域销毁后变量也就随之销毁，而使用引用访问的堆区变量，在一个作用域消失后还可能在外层作用域或者其他作用域仍然存在引用，不能直接销毁，此时就需要通过算法计算该堆区变量是否属于不再需要的变量，从而决定是否需要进行内存回收，在<code>Js</code>中主要有引用计数与标记清除两种垃圾回收算法。</p>
+<h2 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h2><p>对于引用计数垃圾回收算法，把对象是否不再需要简化定义为该对象有没有其他变量或对象引用到它，如果没有引用指向该对象，该对象将被垃圾回收机制回收。在这里，对象的概念不仅特指<code>JavaScript</code>对象，还包括函数作用域或者全局词法作用域。引用计数垃圾回收算法使用比较少，主要是在<code>IE6</code>与<code>IE7</code>等低版本<code>IE</code>浏览器中使用。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span> : &#123;</span><br><span class="line">        <span class="attr">b</span>: <span class="number">11</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 此时两个对象被创建，一个作为另一个的a属性被引用称为对象1，另一个被obj变量引用称为对象2</span></span><br><span class="line"><span class="comment">// 此时两个对象都有被引用的变量，都不能回收内存</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = obj;</span><br><span class="line"><span class="comment">// 此时对于obj所引用的对象2，已经有obj与Obj2两个变量的引用</span></span><br><span class="line"></span><br><span class="line">obj = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 将obj对于对象2的引用解除，此时对象2还存在obj2一个引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a2 = obj2.a;</span><br><span class="line"><span class="comment">// 引用对象1，此时对象1有a与a2两个引用</span></span><br><span class="line"></span><br><span class="line">obj2 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 解除对象2的一个引用，此时对象2的引用数量为0，可以被垃圾回收</span></span><br><span class="line"><span class="comment">// 对象2的a属性引用被解除，此时对象1只有a2一个引用</span></span><br><span class="line"></span><br><span class="line">a2 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 解除a2对于对象1的引用，此时对象1可以被垃圾回收</span></span><br></pre></td></tr></table></figure>
+
+<p>但是对于引用计数垃圾回收算法有个限制，当对象循环引用时，就会造成内存泄漏，也就是引用计数垃圾回收算法无法处理循环引用的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;; <span class="comment">// 命名为对象1，此时引用数量为1</span></span><br><span class="line">    <span class="keyword">var</span> obj2 = &#123;&#125;; <span class="comment">// 命名为对象2，此时引用数量为1</span></span><br><span class="line">    obj.a = obj2; <span class="comment">// obj的a属性引用obj2，此时对象2的引用数量为2</span></span><br><span class="line">    obj2.a = obj; <span class="comment">// obj2的a属性引用obj，此时对象1的引用数量为2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 此时执行栈的obj变量与obj2变量被销毁，对象1与对象2的引用数量减1</span></span><br><span class="line">    <span class="comment">// 对象1的引用数量为1，对象2的引用数量为1，两个对象都不会被引用计数算法垃圾回收</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funct();</span><br><span class="line"><span class="comment">// 两个对象被创建，并互相引用，形成了一个循环，它们被调用之后会离开函数作用域，所以它们已经不再需要了，可以被回收了，然而引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h2><p>对于引用计数垃圾回收算法，把对象是否不再需要简化定义为该对象是否可以获得，该算法设置一个叫做根<code>root</code>的对象，在<code>Javascript</code>里根是全局对象，垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象，以此不断向下查找。从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象，这样便解决了循环引用的问题。所有现代浏览器都使用了标记清除垃圾回收算法，所有对<code>JavaScript</code>垃圾回收算法的改进都是基于标记清除算法的改进。</p>
+<ul>
+<li>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。</li>
+<li>然后，它会去掉运行环境中的变量以及被环境中变量所引用的变量的标记。</li>
+<li>此后，依然有标记的变量就被视为准备删除的变量，原因是在运行环境中已经无法访问到这些变量了。</li>
+<li>最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://blog.touchczy.top/#/JavaScript/Js%E7%9A%84GC%E6%9C%BA%E5%88%B6">https://blog.touchczy.top/#/JavaScript/Js%E7%9A%84GC%E6%9C%BA%E5%88%B6</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>js数组排序</title>
     <url>/eternallycyf/js%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<h1 id="Js实现数组排序"><a href="#Js实现数组排序" class="headerlink" title="Js实现数组排序"></a>Js实现数组排序</h1><p>常用排序的<code>Js</code>实现方案，包括原型链方法调用、简单选择排序、冒泡排序、插入排序、快速排序、希尔排序、堆排序、归并排序。</p>
@@ -4515,34 +4543,6 @@
 
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://blog.touchczy.top/#/JavaScript/Js%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F">https://blog.touchczy.top/#/JavaScript/Js%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js的GC机制</title>
-    <url>/eternallycyf/js%E7%9A%84GC%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="Js的GC机制"><a href="#Js的GC机制" class="headerlink" title="Js的GC机制"></a>Js的GC机制</h1><p>在<code>Js</code>七种基本类型中的引用类型<code>Object</code>的变量其占据内存空间大且大小不固定，在堆内存中实际存储对象，在栈内存中存储对象的指针，对于对象的访问是按引用访问的。在栈区中执行的变量等是通过值访问，当其作用域销毁后变量也就随之销毁，而使用引用访问的堆区变量，在一个作用域消失后还可能在外层作用域或者其他作用域仍然存在引用，不能直接销毁，此时就需要通过算法计算该堆区变量是否属于不再需要的变量，从而决定是否需要进行内存回收，在<code>Js</code>中主要有引用计数与标记清除两种垃圾回收算法。</p>
-<h2 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h2><p>对于引用计数垃圾回收算法，把对象是否不再需要简化定义为该对象有没有其他变量或对象引用到它，如果没有引用指向该对象，该对象将被垃圾回收机制回收。在这里，对象的概念不仅特指<code>JavaScript</code>对象，还包括函数作用域或者全局词法作用域。引用计数垃圾回收算法使用比较少，主要是在<code>IE6</code>与<code>IE7</code>等低版本<code>IE</code>浏览器中使用。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span> : &#123;</span><br><span class="line">        <span class="attr">b</span>: <span class="number">11</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 此时两个对象被创建，一个作为另一个的a属性被引用称为对象1，另一个被obj变量引用称为对象2</span></span><br><span class="line"><span class="comment">// 此时两个对象都有被引用的变量，都不能回收内存</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj2 = obj;</span><br><span class="line"><span class="comment">// 此时对于obj所引用的对象2，已经有obj与Obj2两个变量的引用</span></span><br><span class="line"></span><br><span class="line">obj = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 将obj对于对象2的引用解除，此时对象2还存在obj2一个引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a2 = obj2.a;</span><br><span class="line"><span class="comment">// 引用对象1，此时对象1有a与a2两个引用</span></span><br><span class="line"></span><br><span class="line">obj2 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 解除对象2的一个引用，此时对象2的引用数量为0，可以被垃圾回收</span></span><br><span class="line"><span class="comment">// 对象2的a属性引用被解除，此时对象1只有a2一个引用</span></span><br><span class="line"></span><br><span class="line">a2 = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 解除a2对于对象1的引用，此时对象1可以被垃圾回收</span></span><br></pre></td></tr></table></figure>
-
-<p>但是对于引用计数垃圾回收算法有个限制，当对象循环引用时，就会造成内存泄漏，也就是引用计数垃圾回收算法无法处理循环引用的对象。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;; <span class="comment">// 命名为对象1，此时引用数量为1</span></span><br><span class="line">    <span class="keyword">var</span> obj2 = &#123;&#125;; <span class="comment">// 命名为对象2，此时引用数量为1</span></span><br><span class="line">    obj.a = obj2; <span class="comment">// obj的a属性引用obj2，此时对象2的引用数量为2</span></span><br><span class="line">    obj2.a = obj; <span class="comment">// obj2的a属性引用obj，此时对象1的引用数量为2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 此时执行栈的obj变量与obj2变量被销毁，对象1与对象2的引用数量减1</span></span><br><span class="line">    <span class="comment">// 对象1的引用数量为1，对象2的引用数量为1，两个对象都不会被引用计数算法垃圾回收</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funct();</span><br><span class="line"><span class="comment">// 两个对象被创建，并互相引用，形成了一个循环，它们被调用之后会离开函数作用域，所以它们已经不再需要了，可以被回收了，然而引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收。</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h2><p>对于引用计数垃圾回收算法，把对象是否不再需要简化定义为该对象是否可以获得，该算法设置一个叫做根<code>root</code>的对象，在<code>Javascript</code>里根是全局对象，垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象，以此不断向下查找。从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象，这样便解决了循环引用的问题。所有现代浏览器都使用了标记清除垃圾回收算法，所有对<code>JavaScript</code>垃圾回收算法的改进都是基于标记清除算法的改进。</p>
-<ul>
-<li>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。</li>
-<li>然后，它会去掉运行环境中的变量以及被环境中变量所引用的变量的标记。</li>
-<li>此后，依然有标记的变量就被视为准备删除的变量，原因是在运行环境中已经无法访问到这些变量了。</li>
-<li>最后，垃圾收集器完成内存清除工作，销毁那些带标记的值并回收它们所占用的内存空间。</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://blog.touchczy.top/#/JavaScript/Js%E7%9A%84GC%E6%9C%BA%E5%88%B6">https://blog.touchczy.top/#/JavaScript/Js%E7%9A%84GC%E6%9C%BA%E5%88%B6</a></li>
 </ul>
 ]]></content>
       <categories>
