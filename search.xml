@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用github-copilot智能提示</title>
+    <url>/eternallycyf/%E4%BD%BF%E7%94%A8github-copilot%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA/</url>
+    <content><![CDATA[<h2 id="github-如果绑定了学校邮箱-申请免费资格"><a href="#github-如果绑定了学校邮箱-申请免费资格" class="headerlink" title="github 如果绑定了学校邮箱 申请免费资格"></a>github 如果绑定了学校邮箱 申请免费资格</h2><ul>
+<li><a href="https://link.zhihu.com/?target=https://github.com/features/copilot/signup">https://link.zhihu.com/?target=https%3A//github.com/features/copilot/signup</a></li>
+</ul>
+<h2 id="vscode-更新到最新版"><a href="#vscode-更新到最新版" class="headerlink" title="vscode 更新到最新版"></a>vscode 更新到最新版</h2><ul>
+<li>因为拓展程序默认下载的是最新的 会不匹配 提示报错你 更新最新版的拓展</li>
+<li>或者手动下载别的版本拓展</li>
+</ul>
+<h2 id="api-调用失败"><a href="#api-调用失败" class="headerlink" title="api 调用失败"></a>api 调用失败</h2><ul>
+<li>具体原因是因为 github 没有被墙 但是亚洲区域 cdn 被墙了 需要自己手动指定最新的 host ip 地址</li>
+<li>查询动态 IP 地址<ul>
+<li><a href="https://www.ipaddress.com/">https://www.ipaddress.com/</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># macos host文件路径</span><br><span class="line">/etc/hosts</span><br><span class="line"></span><br><span class="line"># 在这个文件写入最新的ip地址 在https:<span class="comment">//www.ipaddress.com/查询</span></span><br><span class="line"><span class="number">140.82</span><span class="number">.113</span><span class="number">.3</span> github.com</span><br><span class="line"><span class="number">199.232</span><span class="number">.69</span><span class="number">.194</span> github.global.ssl.fastly.net</span><br><span class="line"></span><br><span class="line"># 刷新dns缓存</span><br><span class="line">sudo killall -HUP mDNSResponder</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li><p>只需要在 vscode 登录自己的 github 账号</p>
+</li>
+<li><p>然后下载最新的 github copilot 拓展</p>
+</li>
+<li><p>安装完成后会自动提示你登录并授权</p>
+</li>
+<li><p>然后在右下角有个图标可以看报错信息 和 是否启用</p>
+</li>
+<li><p>使用方式很简单 写注释</p>
+</li>
+<li><p>使用 tab 键自动输入提示内容</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>制作一个油猴脚本</title>
     <url>/eternallycyf/%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AA%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<h2 id="什么是js脚本"><a href="#什么是js脚本" class="headerlink" title="什么是js脚本"></a>什么是js脚本</h2><ul>
