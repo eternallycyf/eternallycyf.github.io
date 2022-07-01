@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git-Commit-Log规范</title>
+    <url>/eternallycyf/Git-Commit-Log%E8%A7%84%E8%8C%83/</url>
+    <content><![CDATA[<h2 id="Commit-message目的"><a href="#Commit-message目的" class="headerlink" title="Commit message目的"></a>Commit message目的</h2><ul>
+<li><code>commit message</code> 应该清晰明了，说明本次提交的目的。</li>
+</ul>
+<h2 id="Augular-规范"><a href="#Augular-规范" class="headerlink" title="Augular 规范"></a>Augular 规范</h2><ul>
+<li><code>Header</code> 是必需的，<code>Body</code> 和 <code>Footer</code> 可以省略。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt; #header</span><br><span class="line"><span class="comment">// 空一行</span></span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="comment">// 空一行</span></span><br><span class="line">&lt;footer&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="格式讲解"><a href="#格式讲解" class="headerlink" title="格式讲解"></a>格式讲解</h2><h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><ul>
+<li><code>Header</code>部分只有一行，包括三个字段：<code>type</code>（必需）、<code>scope</code>（可选）和<code>subject</code>（必需）。</li>
+</ul>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p>用于说明本次<code>commit</code>的类别，只允许使用下面<code>7</code>个标识</p>
+<ul>
+<li><code>feat</code>：新功能（<code>feature</code>）</li>
+<li><code>fix</code>：修补<code>bug</code></li>
+<li><code>docs</code>：文档（<code>documentation</code>）</li>
+<li><code>style</code>： 格式（不影响代码运行的变动）</li>
+<li><code>refactor</code>：重构（即不是新增功能，也不是修改<code>bug</code>的代码变动）</li>
+<li><code>test</code>：增加测试</li>
+<li><code>chore</code>：构建过程或辅助工具的变动</li>
+</ul>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">如果<span class="keyword">type</span>为feat和fix，则该 commit 将肯定出现在 <span class="built_in">Change</span> <span class="built_in">log</span> 之中。</span><br><span class="line">其他情况（docs、chore、style、refactor、test）由你决定，要不要放入 <span class="built_in">Change</span> <span class="built_in">log</span>，建议是不要。</span><br></pre></td></tr></table></figure>
+
+<h3 id="scope"><a href="#scope" class="headerlink" title="scope"></a>scope</h3><ul>
+<li>用于说明 <code>commit</code> 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同</li>
+</ul>
+<h3 id="subject"><a href="#subject" class="headerlink" title="subject"></a>subject</h3><ul>
+<li>是 <code>commit</code> 目的的简短描述，不超过<code>50</code>个字符。</li>
+</ul>
+<h3 id="Body"><a href="#Body" class="headerlink" title="Body"></a>Body</h3><ul>
+<li>有两个注意点：<ul>
+<li>使用第一人称现在时，比如使用<code>change</code>而不是<code>changed</code>或<code>changes</code>。</li>
+<li>应该说明代码变动的动机，以及与以前行为的对比。</li>
+</ul>
+</li>
+<li>用于对本次 <code>commit</code> 的详细描述，可以分成多行。下面是一个范例。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">More detailed explanatory text, <span class="keyword">if</span> necessary.  Wrap it to </span><br><span class="line">about <span class="number">72</span> characters or so. </span><br><span class="line"></span><br><span class="line">Further paragraphs come after blank lines.</span><br><span class="line"></span><br><span class="line">- Bullet points are okay, too</span><br><span class="line">- Use a hanging indent</span><br></pre></td></tr></table></figure>
+
+<h3 id="Footer"><a href="#Footer" class="headerlink" title="Footer"></a>Footer</h3><ul>
+<li><code>Footer</code> 部分只用于两种情况。<h4 id="不兼容变动"><a href="#不兼容变动" class="headerlink" title="不兼容变动"></a>不兼容变动</h4></li>
+<li>如果当前代码与上一个版本不兼容</li>
+<li>则 <code>Footer</code> 部分以<code>BREAKING CHANGE</code>开头，后面是对变动的描述、以及变动理由和迁移方法。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">BREAKING CHANGE: isolate scope bindings definition has changed.</span><br><span class="line"></span><br><span class="line">To migrate the code follow the example below:</span><br><span class="line"></span><br><span class="line">Before:</span><br><span class="line"></span><br><span class="line">scope: &#123;</span><br><span class="line">  <span class="attr">myAttr</span>: <span class="string">&#x27;attribute&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="attr">After</span>:</span><br><span class="line"></span><br><span class="line">scope: &#123;</span><br><span class="line">  <span class="attr">myAttr</span>: <span class="string">&#x27;@&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">The removed <span class="string">`inject`</span> wasn<span class="string">&#x27;t generaly useful for directives so there should be no code using it.</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭Issue"><a href="#关闭Issue" class="headerlink" title="关闭Issue"></a>关闭Issue</h4><ul>
+<li>如果当前 <code>commit</code> 针对某个<code>issue</code>，那么可以在 <code>Footer</code> 部分关闭这个 <code>issue</code> 。</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Closes</span> #<span class="number">234</span></span><br><span class="line"><span class="attribute">Closes</span> #<span class="number">123</span>, #<span class="number">245</span>, #<span class="number">992</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Revert（可忽视）"><a href="#Revert（可忽视）" class="headerlink" title="Revert（可忽视）"></a>Revert（可忽视）</h3><ul>
+<li>还有一种特殊情况，如果当前 <code>commit</code> 用于撤销以前的 <code>commit</code>，则必须以<code>revert:</code>开头，后面跟着被撤销 <code>Commit</code> 的 <code>Header</code>。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">revert: feat(pencil): add <span class="string">&#x27;graphiteWidth&#x27;</span> option</span><br><span class="line"></span><br><span class="line">This reverts commit 667ecc1654a317a13331b17617d973392f415f02.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">Body部分的格式是固定的，必须写成This reverts <span class="keyword">commit</span> &lt;hash&gt;.，</span><br><span class="line">其中的hash是被撤销 <span class="keyword">commit</span> 的 SHA 标识符。</span><br><span class="line"></span><br><span class="line">如果当前 <span class="keyword">commit</span> 与被撤销的 <span class="keyword">commit</span>，在同一个发布（<span class="keyword">release</span>）里面，</span><br><span class="line">那么它们都不会出现在 Change <span class="keyword">log</span> 里面。如果两者在不同的发布，</span><br><span class="line">那么当前 <span class="keyword">commit</span>，会出现在 Change <span class="keyword">log</span> 的Reverts小标题下面。</span><br></pre></td></tr></table></figure>
+
+<h3 id="提交频率"><a href="#提交频率" class="headerlink" title="提交频率"></a>提交频率</h3><ul>
+<li>关于什么时候提交一次：</li>
+<li>每次你写完一个功能的时候，就应该做一次提交（这个提交是提交到本地的git库中）</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://www.jianshu.com/p/c7e40dab5b05">https://www.jianshu.com/p/c7e40dab5b05</a></li>
+<li><a href="https://jiongks.name/blog/git-commit/">https://jiongks.name/blog/git-commit/</a></li>
+<li><a href="https://www.npmjs.com/package/commitizen">https://www.npmjs.com/package/commitizen</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用github-copilot智能提示</title>
     <url>/eternallycyf/%E4%BD%BF%E7%94%A8github-copilot%E6%99%BA%E8%83%BD%E6%8F%90%E7%A4%BA/</url>
     <content><![CDATA[<h2 id="github-如果绑定了学校邮箱-申请免费资格"><a href="#github-如果绑定了学校邮箱-申请免费资格" class="headerlink" title="github 如果绑定了学校邮箱 申请免费资格"></a>github 如果绑定了学校邮箱 申请免费资格</h2><ul>
