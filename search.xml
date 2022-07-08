@@ -908,6 +908,22 @@
       </tags>
   </entry>
   <entry>
+    <title>贪婪模式</title>
+    <url>/eternallycyf/%E8%B4%AA%E5%A9%AA%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式"></a>贪婪模式</h2><ul>
+<li><code>?</code>: 当该字符紧跟在任何一个其他限制符<code>(*, +, ?, &#123;n&#125;, &#123;n,&#125;, &#123;n,m&#125;)</code>后面时</li>
+<li>匹配模式是非贪婪的，非贪婪模式尽可能少的匹配所搜索的字符串</li>
+<li>而默认的贪婪模式则尽可能多的匹配所搜索的字符串，例如对于字符串<code>oooo，o+?</code>将匹配单个<code>o</code>，而<code>o+</code>将匹配所有<code>o</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 默认是匹配最大可能</span></span><br><span class="line"><span class="keyword">var</span> str=<span class="string">&#x27;abcd&#123;&#123;efg&#125;&#125;abcd&#123;&#123;xyc&#125;&#125;&#x27;</span></span><br><span class="line">reg = <span class="regexp">/&#123;&#123;.*&#125;&#125;/g</span> <span class="comment">// &#123;&#123;efg&#125;&#125;abcd&#123;&#123;xyz&#125;&#125;</span></span><br><span class="line"># 非贪婪模式 *? ?? +? </span><br><span class="line">reg = <span class="regexp">/&#123;&#123;.*?&#125;&#125;/g</span> <span class="comment">// &#123;&#123;efg&#125;&#125; &#123;&#123;xyz&#125;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>正向预查</title>
     <url>/eternallycyf/%E6%AD%A3%E5%90%91%E9%A2%84%E6%9F%A5/</url>
     <content><![CDATA[<h2 id="正向预查"><a href="#正向预查" class="headerlink" title="正向预查"></a>正向预查</h2><h3 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h3><ul>
@@ -933,22 +949,6 @@
 <li>与正向否定预查类似 只是方向相反</li>
 </ul>
 ]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>贪婪模式</title>
-    <url>/eternallycyf/%E8%B4%AA%E5%A9%AA%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式"></a>贪婪模式</h2><ul>
-<li><code>?</code>: 当该字符紧跟在任何一个其他限制符<code>(*, +, ?, &#123;n&#125;, &#123;n,&#125;, &#123;n,m&#125;)</code>后面时</li>
-<li>匹配模式是非贪婪的，非贪婪模式尽可能少的匹配所搜索的字符串</li>
-<li>而默认的贪婪模式则尽可能多的匹配所搜索的字符串，例如对于字符串<code>oooo，o+?</code>将匹配单个<code>o</code>，而<code>o+</code>将匹配所有<code>o</code></li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 默认是匹配最大可能</span></span><br><span class="line"><span class="keyword">var</span> str=<span class="string">&#x27;abcd&#123;&#123;efg&#125;&#125;abcd&#123;&#123;xyc&#125;&#125;&#x27;</span></span><br><span class="line">reg = <span class="regexp">/&#123;&#123;.*&#125;&#125;/g</span> <span class="comment">// &#123;&#123;efg&#125;&#125;abcd&#123;&#123;xyz&#125;&#125;</span></span><br><span class="line"># 非贪婪模式 *? ?? +? </span><br><span class="line">reg = <span class="regexp">/&#123;&#123;.*?&#125;&#125;/g</span> <span class="comment">// &#123;&#123;efg&#125;&#125; &#123;&#123;xyz&#125;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
@@ -4509,6 +4509,39 @@
       </tags>
   </entry>
   <entry>
+    <title>惰性函数</title>
+    <url>/eternallycyf/%E6%83%B0%E6%80%A7%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="惰性函数"><a href="#惰性函数" class="headerlink" title="惰性函数"></a>惰性函数</h2><ul>
+<li><p>惰性函数，是针对优化频繁使用的函数。常用于函数库的编写、单例模式之中</p>
+</li>
+<li><p>惰性加载表示函数执行的分支只会在函数第一次调用的时候执行。在第一次调用的过程中。该函数被覆盖为另一个按照合适的方式执行的函数。这样任何对原函数的调用就不用再经过执行的分支了</p>
+</li>
+<li><p>写一个函数 让每次都返回首次调用的时间</p>
+<ul>
+<li>缺点<ul>
+<li>污染全局变量</li>
+<li>多余的 <code>if</code> 判断<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getTimeStamp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 直接为外界的变量赋值</span></span><br><span class="line">   timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   <span class="keyword">return</span> timeStamp;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>自执行函数 避免污染全局变量</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">      <span class="keyword">return</span> timeStamp;</span><br><span class="line">    &#125;</span><br><span class="line">    timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">return</span> timeStamp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
+<li><p>第一次只是在给函数重新定义 第二次执行时候才生效</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> getTimeStamp()</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="element-ui的应用"><a href="#element-ui的应用" class="headerlink" title="element ui的应用"></a>element ui的应用</h2><ul>
+<li>处理 dom 事件<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> on = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isServer &amp;&amp; <span class="built_in">document</span>.addEventListener) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.addEventListener(event, handler, <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.attachEvent(<span class="string">&#x27;on&#x27;</span> + event, handler);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="switch的应用"><a href="#switch的应用" class="headerlink" title="switch的应用"></a>switch的应用</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (num) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">2</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">3</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="literal">null</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> test()</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">3</span>)); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>获取getter的几种方式</title>
     <url>/eternallycyf/%E8%8E%B7%E5%8F%96getter%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="获取getter的几种方式"><a href="#获取getter的几种方式" class="headerlink" title="获取getter的几种方式"></a>获取getter的几种方式</h2><ul>
@@ -4538,39 +4571,6 @@
 <li>同样的 兼容性没有 <code>__lookupGetter__</code> 好</li>
 </ul>
 ]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>惰性函数</title>
-    <url>/eternallycyf/%E6%83%B0%E6%80%A7%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="惰性函数"><a href="#惰性函数" class="headerlink" title="惰性函数"></a>惰性函数</h2><ul>
-<li><p>惰性函数，是针对优化频繁使用的函数。常用于函数库的编写、单例模式之中</p>
-</li>
-<li><p>惰性加载表示函数执行的分支只会在函数第一次调用的时候执行。在第一次调用的过程中。该函数被覆盖为另一个按照合适的方式执行的函数。这样任何对原函数的调用就不用再经过执行的分支了</p>
-</li>
-<li><p>写一个函数 让每次都返回首次调用的时间</p>
-<ul>
-<li>缺点<ul>
-<li>污染全局变量</li>
-<li>多余的 <code>if</code> 判断<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getTimeStamp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 直接为外界的变量赋值</span></span><br><span class="line">   timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   <span class="keyword">return</span> timeStamp;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br><span class="line"> <span class="built_in">console</span>.log(getTimeStamp());</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>自执行函数 避免污染全局变量</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeStamp = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timeStamp) &#123;</span><br><span class="line">      <span class="keyword">return</span> timeStamp;</span><br><span class="line">    &#125;</span><br><span class="line">    timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">return</span> timeStamp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
-<li><p>第一次只是在给函数重新定义 第二次执行时候才生效</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeStamp = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">   getTimeStamp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> timeStamp</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> getTimeStamp()</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="element-ui的应用"><a href="#element-ui的应用" class="headerlink" title="element ui的应用"></a>element ui的应用</h2><ul>
-<li>处理 dom 事件<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> on = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isServer &amp;&amp; <span class="built_in">document</span>.addEventListener) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.addEventListener(event, handler, <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">element, event, handler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (element &amp;&amp; event &amp;&amp; handler) &#123;</span><br><span class="line">        element.attachEvent(<span class="string">&#x27;on&#x27;</span> + event, handler);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="switch的应用"><a href="#switch的应用" class="headerlink" title="switch的应用"></a>switch的应用</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (num) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">1</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">2</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="number">3</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      test = <span class="function">() =&gt;</span> <span class="literal">null</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> test()</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test(<span class="number">3</span>)); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
